@@ -1,49 +1,49 @@
-import { makeStyles } from '@mui/styles';
-
 // colors
-import { colors } from '../../../colors';
-import { fontWeight, textLevel } from '../typography';
+import { Colors } from "../../colors";
+import { fontWeight, textLevel } from "../typography";
+import { createUseStyles } from "react-jss";
 
 interface StyleProps {
   collapsed?: boolean;
   active?: boolean;
 }
 
-export const useStyles = makeStyles({
+export const useStyles = createUseStyles({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     gap: 0,
   },
   header: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    cursor: 'pointer',
-    background: ({ active }) => (active ? colors.neutral50 : 'transparent'),
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    cursor: "pointer",
+    background: ({ active }) => (active ? Colors.gray : "transparent"),
   },
   chevronIcon: {
     width: 24,
     minWidth: 24,
     height: 24,
-    objectFit: 'contain',
-    transition: '0.4s',
-    marginLeft: '12px',
-    marginRight: '12px',
-    transform: ({ collapsed }: StyleProps) => `rotate(${collapsed ? '180deg' : 0})`,
+    objectFit: "contain",
+    transition: "0.4s",
+    marginLeft: "12px",
+    marginRight: "12px",
+    transform: ({ collapsed }: StyleProps) =>
+      `rotate(${collapsed ? "180deg" : 0})`,
   },
   label: {
-    fontFamily: 'Manrope',
-    fontWeight: 'bold',
+    fontFamily: "Manrope",
+    fontWeight: "bold",
     fontSize: 16,
-    lineHeight: '22px',
+    lineHeight: "22px",
   },
   flexRow: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
   },
   subLabel: {
-    color: colors.neutral600,
+    color: Colors.gray,
     fontSize: textLevel.S,
     fontWeight: fontWeight.LIGHT,
   },
