@@ -11,7 +11,7 @@ import { addtown } from "../../parser/town";
 import AddNewInventory from "./add-new-inventory";
 import InventoryList from "./inventory-list";
 import { useStylesFromThemeFunction, ComponentProps } from "./Inventory";
-import "boxicons";
+// import "boxicons";
 import { Drawer } from "../common/components/drawer/Drawer";
 import ButtonComponent from "../common/components/button-component";
 import { Text } from "../common/components/typography";

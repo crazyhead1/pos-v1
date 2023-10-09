@@ -17,7 +17,7 @@ import AreaForm from "../sales-route/area";
 import TownForm from "../sales-route/town";
 import SupplierForm from "../supplier/supplier-form";
 import { useStylesFromThemeFunction, ComponentProps } from "./AppLayout";
-import "boxicons";
+// import "boxicons";
 import Inventory from "../inventory";
 import Users from "../users";
 import Category from "../category";
