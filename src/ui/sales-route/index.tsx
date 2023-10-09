@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { addOneSalesRoute } from "../../parser/sales-route";
@@ -11,10 +11,7 @@ import ButtonComponent from "../common/components/button-component";
 
 interface ComponentProps {}
 
-const SalesRoute: React.FC<ComponentProps> = ({}) => {
-  //const classes = useStylesFromThemeFunction();
-  // const [activeTab,setActiveTab] = useState('pos');
-  const [showSidebar, setShowSidebar] = useState(true);
+const SalesRoute: React.FC<ComponentProps> = () => {
   const [showSalesRouteList, setShowSalesRouteList] = React.useState(true);
   const handleAddNewClick = () => {
     setShowSalesRouteList(!showSalesRouteList);

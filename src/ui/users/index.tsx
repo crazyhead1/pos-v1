@@ -1,9 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import toast from "react-hot-toast";
-import { addOneCustomer } from "../../parser/customer";
-import { addOneEmployee } from "../../parser/employee";
-import { addOneSupplier } from "../../parser/supplier";
 // import 'boxicons';
 import Customer from "../customer";
 import Supplier from "../supplier";
@@ -11,7 +7,7 @@ import Employee from "../employee";
 
 interface ComponentProps {}
 
-const Users: React.FC<ComponentProps> = ({}) => {
+const Users: React.FC<ComponentProps> = () => {
   //const classes = useStylesFromThemeFunction();
   // const [activeTab,setActiveTab] = useState('pos');
   // const [showSidebar,setShowSidebar] = useState(true);
