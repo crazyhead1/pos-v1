@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useStylesFromThemeFunction, ComponentProps } from "./Colors.style";
-import "boxicons";
+// import "boxicons";
 import { COLOR_GRIDS } from "../../common/themes/color-grads";
 import ButtonComponent from "../../common/components/button-component";
 
