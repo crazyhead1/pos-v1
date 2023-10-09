@@ -1,9 +1,9 @@
-import { makeStyles } from '@mui/styles';
+import { createUseStyles } from "react-jss";
 
-export const useStyles = makeStyles({
+export const useStyles = createUseStyles({
   root: {
-    fontFamily: 'Manrope',
-    fontWeight: 'bold',
+    fontFamily: "Manrope",
+    fontWeight: "bold",
     fontSize: 18,
   },
 });

@@ -1,28 +1,28 @@
-import { ReactNode } from 'react';
-import { IGlyphs } from '../../../icons';
+import { ReactNode } from "react";
+import { IGlyphs } from "../../icons";
 
 export enum badgeType {
-  FILLED = 'FILLED',
-  OUTLINED = 'OUTLINED',
-  ICON = 'ICON',
+  FILLED = "FILLED",
+  OUTLINED = "OUTLINED",
+  ICON = "ICON",
 }
 
 export enum badgeStyle {
-  PRIMARY = 'PRIMARY',
-  CRITICAL = 'CRITICAL',
-  HIGH = 'HIGH',
-  MEDIUM = 'MEDIUM',
-  LOW = 'LOW',
-  MISREPORTED = 'MISREPORTED',
-  RESOLVED = 'RESOLVED',
-  UNRELATED = 'UNRELATED',
-  POSITIVE = 'POSITIVE',
-  SUCCESS = 'SUCCESS',
-  GREEN = 'GREEN',
-  PURPLE = 'PURPLE',
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
-  DARK = 'DARK',
+  PRIMARY = "PRIMARY",
+  CRITICAL = "CRITICAL",
+  HIGH = "HIGH",
+  MEDIUM = "MEDIUM",
+  LOW = "LOW",
+  MISREPORTED = "MISREPORTED",
+  RESOLVED = "RESOLVED",
+  UNRELATED = "UNRELATED",
+  POSITIVE = "POSITIVE",
+  SUCCESS = "SUCCESS",
+  GREEN = "GREEN",
+  PURPLE = "PURPLE",
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  DARK = "DARK",
 }
 
 export enum badgeSize {
@@ -36,6 +36,6 @@ export interface IBadgeProps {
   variant?: badgeType;
   size?: badgeSize;
   style?: badgeStyle;
-  icon?: IGlyphs['glyph'];
+  icon?: IGlyphs["glyph"];
   children?: ReactNode;
 }

@@ -1,50 +1,50 @@
-import React, {FC, useCallback, useState} from 'react';
-import {createUseStyles} from 'react-jss';
-import uploadFileCloudIcon from 'assets/upload_file_cloud_icon.svg';
-import {useDropzone} from 'react-dropzone';
-import {ThemeInterface} from '../../../../interfaces/theme';
-import RemoveIcon from '../../../../assets/component/RemoveIcon';
-import {Colors} from '../../colors';
-import IconButton from '../icon-button';
-import {Accept} from 'react-dropzone';
+import React, { FC, useCallback, useState } from "react";
+import { createUseStyles } from "react-jss";
+import uploadFileCloudIcon from "../../../../assets/upload_file_cloud_icon.svg";
+import { useDropzone } from "react-dropzone";
+import { ThemeInterface } from "../../../../interfaces/theme";
+import RemoveIcon from "../../../../assets/component/RemoveIcon";
+import { Colors } from "../../colors";
+import IconButton from "../icon-button";
+import { Accept } from "react-dropzone";
 
 const useStylesFromThemeFunction = createUseStyles((theme: ThemeInterface) => {
   return {
     dragAndDropText: {
-      color: 'rgba(48, 46, 56, 0.6)',
-      '& span': {
-        fontWeight: 'bold',
+      color: "rgba(48, 46, 56, 0.6)",
+      "& span": {
+        fontWeight: "bold",
       },
     },
     label: {
-      color: '#222b45',
+      color: "#222b45",
       fontSize: 12,
       fontWeight: theme.font.weightSemibold,
       marginBottom: 3,
       marginLeft: 10,
     },
     uploadBox: {
-      alignItems: 'center',
-      background: '#F5F7FB',
-      borderColor: '#E7ECF5',
+      alignItems: "center",
+      background: "#F5F7FB",
+      borderColor: "#E7ECF5",
       borderRadius: 10,
-      borderStyle: 'dotted',
+      borderStyle: "dotted",
       borderWidth: 2,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
       minHeight: 150,
     },
     uploadBoxActive: {
-      borderColor: '#6135FB',
+      borderColor: "#6135FB",
     },
     uploadBoxRow: {
-      flexDirection: 'row',
-      minHeight: '36px !important',
-      alignItems: 'center',
-      '& p': {
-        marginTop: 'unset !important',
-        marginLeft: '10px',
+      flexDirection: "row",
+      minHeight: "36px !important",
+      alignItems: "center",
+      "& p": {
+        marginTop: "unset !important",
+        marginLeft: "10px",
       },
     },
   };
@@ -67,8 +67,8 @@ interface ComponentProps {
 }
 
 enum LayoutType {
-  Column = 'column',
-  Row = 'row',
+  Column = "column",
+  Row = "row",
 }
 
 const FileUpload: FC<ComponentProps> = ({
@@ -80,17 +80,18 @@ const FileUpload: FC<ComponentProps> = ({
   onChange,
   multiple,
 }) => {
-  const classes = useStylesFromThemeFunction({theme});
-  const onDrop = useCallback(async (acceptedFiles:any) => {
+  const classes = useStylesFromThemeFunction({ theme });
+  const onDrop = useCallback(async (acceptedFiles: any) => {
     await handleFileUpload(acceptedFiles[0]);
   }, []);
-  const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
-    onDrop,
-    accept: acceptedFileTypes,
-    maxSize: 5 * 1024 * 1024,
-    maxFiles: 1,
-    multiple,
-  });
+  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
+    useDropzone({
+      onDrop,
+      accept: acceptedFileTypes,
+      maxSize: 5 * 1024 * 1024,
+      maxFiles: 1,
+      multiple,
+    });
 
   const handleFileUpload = async (file: File) => {
     if (file) {
@@ -107,9 +108,9 @@ const FileUpload: FC<ComponentProps> = ({
     <span
       key={file.name}
       style={{
-        display: 'flex',
-        textDecoration: 'none',
-        alignItems: 'center',
+        display: "flex",
+        textDecoration: "none",
+        alignItems: "center",
         gap: 10,
       }}
     >
@@ -118,7 +119,7 @@ const FileUpload: FC<ComponentProps> = ({
         style={{
           border: `1px solid ${Colors.gray}`,
           borderRadius: 5,
-          display: 'flex',
+          display: "flex",
         }}
         onClick={() => remove(i)}
       >
@@ -146,9 +147,9 @@ const FileUpload: FC<ComponentProps> = ({
     <div className={className}>
       {label && <div className={classes.label}>{label}</div>}
       <div
-        className={`${classes.uploadBox} ${isDragActive ? classes.uploadBoxActive : ''} ${
-          type === LayoutType.Row && classes.uploadBoxRow
-        }`}
+        className={`${classes.uploadBox} ${
+          isDragActive ? classes.uploadBoxActive : ""
+        } ${type === LayoutType.Row && classes.uploadBoxRow}`}
         {...getRootProps()}
       >
         <img src={uploadFileCloudIcon} alt="upload-file" />
@@ -156,7 +157,9 @@ const FileUpload: FC<ComponentProps> = ({
         <input {...getInputProps()} />
         <p className={classes.dragAndDropText}>
           {acceptedFiles.length <= 0 &&
-            (isDragActive ? 'Drop your file here' : 'You can drag-and-drop or click to select')}
+            (isDragActive
+              ? "Drop your file here"
+              : "You can drag-and-drop or click to select")}
           {files}
         </p>
       </div>
