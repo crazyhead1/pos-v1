@@ -28,7 +28,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
   products,
   disabled,
 }) => {
-  const { productList, loading, error } = useSelector(
+  const { productList, loading } = useSelector(
     (state: IStateSelector) => state.data
   );
   const [showLoader, setShowLoader] = useState(false || isLoading || loading);
@@ -80,7 +80,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
     if (!concernedProduct) return;
     isLoading = true;
     setAddedProducts(
-      addedProducts.map((product) => {
+      addedProducts.filter((product) => {
         if (product.name === concernedProduct.name) {
           if (parseInt(product.quantity) > 1) {
             isLoading = false;
@@ -93,6 +93,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
           isLoading = false;
           return product;
         }
+        return null;
       })
     );
   };
@@ -100,7 +101,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
     if (!concernedProduct) return;
     isLoading = true;
     setAddedProducts(
-      addedProducts.map((product) => {
+      addedProducts.filter((product) => {
         if (product.name === concernedProduct.name) {
           if (parseInt(product.quantity) > 1) {
             isLoading = false;
@@ -113,6 +114,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
           isLoading = false;
           return product;
         }
+        return null;
       })
     );
   };
@@ -159,6 +161,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
         </tr>
       );
     });
+
     isLoading = false;
     return renderedProducts;
   }, [addedProducts]);

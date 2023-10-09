@@ -1,24 +1,15 @@
 import React, { useState } from "react";
-import { Tab, Tabs } from "react-bootstrap";
-import toast from "react-hot-toast";
-import { addOneArea } from "../../parser/area";
-import { addOneCategory } from "../../parser/categories";
-import { addOneCustomer } from "../../parser/customer";
-import { addOneEmployee } from "../../parser/employee";
-import { addOneSalesRoute } from "../../parser/sales-route";
-import { addOneSupplier } from "../../parser/supplier";
-import { addtown } from "../../parser/town";
+
 import AddNewInventory from "./add-new-inventory";
 import InventoryList from "./inventory-list";
-import { useStylesFromThemeFunction, ComponentProps } from "./Inventory";
+import { ComponentProps } from "./Inventory";
 // import "boxicons";
 import { Drawer } from "../common/components/drawer/Drawer";
 import ButtonComponent from "../common/components/button-component";
 import { Text } from "../common/components/typography";
 import { btnType } from "../common/components/button-component/ButtonComponent.types";
 
-const Inventory: React.FC<ComponentProps> = ({}) => {
-  const classes = useStylesFromThemeFunction();
+const Inventory: React.FC<ComponentProps> = () => {
   // const [activeTab,setActiveTab] = useState('pos');
   // const [showSidebar, setShowSidebar] = useState(true);
   const [showAddInventoryDrawer, setShowAddInventoryDrawer] = useState(false);

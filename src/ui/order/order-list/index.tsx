@@ -1,10 +1,5 @@
 import React from "react";
-import EditIcon from "../../../assets/component/EditIcon";
-import RemoveIcon from "../../../assets/component/RemoveIcon";
-import { Colors } from "../../common/colors";
 import Table from "../../common/components/table";
-import { useStylesFromThemeFunction } from "./OrderList";
-import toast from "react-hot-toast";
 import { getOrders } from "../../../data-management/cloud/firebase/firestore/order";
 
 interface ComponentProps {
@@ -12,8 +7,7 @@ interface ComponentProps {
 }
 
 const OrderList: React.FC<ComponentProps> = (props) => {
-  const classes = useStylesFromThemeFunction();
-  const [tableHeadings, setTableHeadings] = React.useState([
+  const [tableHeadings] = React.useState([
     "id",
     "Title",
     "Units in Stock",
@@ -21,12 +15,10 @@ const OrderList: React.FC<ComponentProps> = (props) => {
     "category",
     "description",
   ] as string[]);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [selectedOrder, setSelectedOrder] = React.useState({} as any);
+  const [isLoading] = React.useState(false);
   const [orders, seOrders] = React.useState(
     props?.orders as any[] | [] as any[]
   );
-  const [showOrderModal, setShowOrderModal] = React.useState(false);
 
   // const handleCloseEditModal = () => setShowEditModal(false);
   // const handleShowEditModal = (product: any) => {
@@ -38,6 +30,7 @@ const OrderList: React.FC<ComponentProps> = (props) => {
       seOrders(res);
       renderTableData();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // const handleRemoveProduct = (product: any) => {

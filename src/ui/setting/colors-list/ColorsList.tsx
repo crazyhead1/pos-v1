@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useStylesFromThemeFunction, ComponentProps } from "./Colors.style";
 // import "boxicons";
 import { COLOR_GRIDS } from "../../common/themes/color-grads";
-import ButtonComponent from "../../common/components/button-component";
 
-export const ColorList: React.FC<ComponentProps> = ({}) => {
+export const ColorList: React.FC<ComponentProps> = () => {
   const classes = useStylesFromThemeFunction();
   const [isHovering, setIsHovering] = useState(0);
 
@@ -15,9 +14,9 @@ export const ColorList: React.FC<ComponentProps> = ({}) => {
   const handleMouseOut = (index) => {
     setIsHovering(index);
   };
-  const handleThemeSelect = (colorGridKey: string) => {
-    console.log(colorGridKey, " are selected");
-  };
+  // const handleThemeSelect = (colorGridKey: string) => {
+  //   console.log(colorGridKey, " are selected");
+  // };
 
   return (
     <div className={classes.grid}>

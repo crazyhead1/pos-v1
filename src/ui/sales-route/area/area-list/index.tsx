@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { Modal } from "react-bootstrap";
 import { getAllAreas, editArea } from "../../../../parser/area";
 import AreaForm from "../area-form";
-import ButtonComponent from "../../../common/components/button-component";
 
 interface ComponentProps {
   areas?: any[];
@@ -16,12 +15,8 @@ interface ComponentProps {
 
 const AreaList: React.FC<ComponentProps> = (props) => {
   const classes = useStylesFromThemeFunction();
-  const [tableHeadings, setTableHeadings] = React.useState([
-    "id",
-    "Name",
-    "Actions",
-  ] as string[]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [tableHeadings] = React.useState(["id", "Name", "Actions"] as string[]);
+  const [isLoading] = React.useState(false);
   const [selectedArea, setSelectedArea] = React.useState({} as any);
   const [areas, setAreas] = React.useState(props?.areas as any[] | [] as any[]);
   const [showAreaUpdateModal, setShowAreaUpdateModal] = React.useState(false);
@@ -36,6 +31,7 @@ const AreaList: React.FC<ComponentProps> = (props) => {
       setAreas(res);
       renderTableData();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRemoveArea = (Area: any) => {

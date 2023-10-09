@@ -11,7 +11,6 @@ import {
   editProductFromInventory,
 } from "../../../parser/inventory";
 import InventoryForm from "../Inventory-form";
-import ButtonComponent from "../../common/components/button-component";
 
 interface ComponentProps {
   products?: any[];
@@ -19,7 +18,7 @@ interface ComponentProps {
 
 const InventoryList: React.FC<ComponentProps> = (props) => {
   const classes = useStylesFromThemeFunction();
-  const [tableHeadings, setTableHeadings] = React.useState([
+  const [tableHeadings] = React.useState([
     "id",
     "Title",
     "Units in Stock",
@@ -28,7 +27,7 @@ const InventoryList: React.FC<ComponentProps> = (props) => {
     "description",
     "Actions",
   ] as string[]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading] = React.useState(false);
   const [selectedProduct, setSelectedProduct] = React.useState({} as any);
   const [products, setProducts] = React.useState(
     props?.products as any[] | [] as any[]
@@ -46,6 +45,7 @@ const InventoryList: React.FC<ComponentProps> = (props) => {
       setProducts(res);
       renderTableData();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRemoveProduct = (product: any) => {

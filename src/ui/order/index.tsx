@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import toast from "react-hot-toast";
-import { useStylesFromThemeFunction, ComponentProps } from "./Orders";
+import { ComponentProps } from "./Orders";
 // import "boxicons";
 import OrderList from "./order-list";
 
-const Order: React.FC<ComponentProps> = ({}) => {
-  const classes = useStylesFromThemeFunction();
-  // const [activeTab,setActiveTab] = useState('pos');
-  const [showSidebar, setShowSidebar] = useState(true);
+const Order: React.FC<ComponentProps> = () => {
   // const onSubmitSupplier = (values,{resetForm})=>{
   //     addOneSupplier(values).then(res => {
   //         toast.success(`${values.name} added successfully`);

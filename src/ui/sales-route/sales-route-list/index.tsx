@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { Modal } from "react-bootstrap";
 import { getAllSalesRoutes, editSalesRoute } from "../../../parser/sales-route";
 import SalesRouteForm from "../sales-route-form";
-import ButtonComponent from "../../common/components/button-component";
 
 interface ComponentProps {
   salesRoutes?: any[];
@@ -16,12 +15,8 @@ interface ComponentProps {
 
 const SalesRouteList: React.FC<ComponentProps> = (props) => {
   const classes = useStylesFromThemeFunction();
-  const [tableHeadings, setTableHeadings] = React.useState([
-    "id",
-    "Name",
-    "Actions",
-  ] as string[]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [tableHeadings] = React.useState(["id", "Name", "Actions"] as string[]);
+  const [isLoading] = React.useState(false);
   const [selectedSalesRoute, setSelectedSalesRoute] = React.useState({} as any);
   const [salesRoutes, setSalesRoutes] = React.useState(
     props?.salesRoutes as any[] | [] as any[]
@@ -39,6 +34,7 @@ const SalesRouteList: React.FC<ComponentProps> = (props) => {
       setSalesRoutes(res);
       renderTableData();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRemoveSalesRoute = (SalesRoute: any) => {

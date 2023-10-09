@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { Modal } from "react-bootstrap";
 import { gettowns, edittown } from "../../../../parser/town";
 import TownForm from "../town-form";
-import ButtonComponent from "../../../common/components/button-component";
 
 interface ComponentProps {
   towns?: any[];
@@ -16,12 +15,8 @@ interface ComponentProps {
 
 const TownList: React.FC<ComponentProps> = (props) => {
   const classes = useStylesFromThemeFunction();
-  const [tableHeadings, setTableHeadings] = React.useState([
-    "id",
-    "Name",
-    "Actions",
-  ] as string[]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [tableHeadings] = React.useState(["id", "Name", "Actions"] as string[]);
+  const [isLoading] = React.useState(false);
   const [selectedTown, setSelectedTown] = React.useState({} as any);
   const [towns, setTowns] = React.useState(props?.towns as any[] | [] as any[]);
   const [showTownUpdateModal, setShowTownUpdateModal] = React.useState(false);
@@ -36,6 +31,7 @@ const TownList: React.FC<ComponentProps> = (props) => {
       setTowns(res);
       renderTableData();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRemoveTown = (Town: any) => {

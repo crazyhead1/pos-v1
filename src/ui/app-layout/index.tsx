@@ -1,21 +1,6 @@
-import React, { useState, useSyncExternalStore } from "react";
-import { Col, Collapse, Nav, Row, Tab, Tabs } from "react-bootstrap";
-import toast from "react-hot-toast";
-import { addOneArea } from "../../parser/area";
-import { addOneCategory } from "../../parser/categories";
-import { addOneCustomer } from "../../parser/customer";
-import { addOneEmployee } from "../../parser/employee";
-import { addOneSalesRoute } from "../../parser/sales-route";
-import { addOneSupplier } from "../../parser/supplier";
-import { addtown } from "../../parser/town";
-import CategoryForm from "../category/category-form";
-import CustomerForm from "../customer/customer-form";
-import EmployeeForm from "../employee/employee-form";
+import React, { useState } from "react";
+import { Col, Collapse, Nav, Row, Tab } from "react-bootstrap";
 import { POSEngine } from "../pos-engine";
-import SalesRouteForm from "../sales-route/sales-route-form";
-import AreaForm from "../sales-route/area";
-import TownForm from "../sales-route/town";
-import SupplierForm from "../supplier/supplier-form";
 import { useStylesFromThemeFunction, ComponentProps } from "./AppLayout";
 // import "boxicons";
 import Inventory from "../inventory";
@@ -26,80 +11,80 @@ import Order from "../order";
 import Sales from "../sales";
 import Setting from "../setting";
 
-const AppLayout: React.FC<ComponentProps> = ({}) => {
+const AppLayout: React.FC<ComponentProps> = () => {
   const classes = useStylesFromThemeFunction();
   // const [activeTab,setActiveTab] = useState('pos');
   const [showSidebar, setShowSidebar] = useState(true);
-  const onSubmitSupplier = (values, { resetForm }) => {
-    addOneSupplier(values)
-      .then((res) => {
-        toast.success(`${values.name} added successfully`);
-        resetForm();
-      })
-      .catch((err) => {
-        toast.error(err.message || "Something went wrong with adding supplier");
-      });
-  };
-  const onSubmitCustomer = (values, { resetForm }) => {
-    addOneCustomer(values)
-      .then((res) => {
-        toast.success(`${values.name} added successfully`);
-        resetForm();
-      })
-      .catch((err) => {
-        toast.error(err.message || "Something went wrong with adding customer");
-      });
-  };
-  const onSubmitTown = (values, { resetForm }) => {
-    addtown(values)
-      .then((res) => {
-        toast.success(`${values.name} added successfully`);
-        resetForm();
-      })
-      .catch((err) => {
-        toast.error(err.message || "Something went wrong with adding town");
-      });
-  };
-  const onSubmitArea = (values, { resetForm }) => {
-    addOneArea(values)
-      .then((res) => {
-        toast.success(`${values.name} added successfully`);
-        resetForm();
-      })
-      .catch((err) => {
-        toast.error(err.message || "Something went wrong with adding area");
-      });
-  };
-  const onSubmitSalesRoute = (values, { resetForm }) => {
-    addOneSalesRoute(values)
-      .then((res) => {
-        toast.success(`${values.name} added successfully`);
-        resetForm();
-      })
-      .catch((err) => {
-        toast.error(err.message || "Something went wrong with adding route");
-      });
-  };
-  const onSubmitCategory = (values, { resetForm }) => {
-    addOneCategory(values, values.type)
-      .then((res) => {
-        toast.success(`${values.name} added successfully`);
-        resetForm();
-      })
-      .catch((err) => {
-        toast.error(err.message || "Something went wrong with adding category");
-      });
-  };
-  const onSubmitEmployee = (values, { resetForm }) => {
-    addOneEmployee(values)
-      .then((res) => {
-        toast.success(`${values.name} added successfully`);
-        resetForm();
-      })
-      .catch((err) => {
-        toast.error(err.message || "Something went wrong with adding employee");
-      });
-  };
+  // const onSubmitSupplier = (values, { resetForm }) => {
+  //   addOneSupplier(values)
+  //     .then((res) => {
+  //       toast.success(`${values.name} added successfully`);
+  //       resetForm();
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message || "Something went wrong with adding supplier");
+  //     });
+  // };
+  // const onSubmitCustomer = (values, { resetForm }) => {
+  //   addOneCustomer(values)
+  //     .then((res) => {
+  //       toast.success(`${values.name} added successfully`);
+  //       resetForm();
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message || "Something went wrong with adding customer");
+  //     });
+  // };
+  // const onSubmitTown = (values, { resetForm }) => {
+  //   addtown(values)
+  //     .then((res) => {
+  //       toast.success(`${values.name} added successfully`);
+  //       resetForm();
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message || "Something went wrong with adding town");
+  //     });
+  // };
+  // const onSubmitArea = (values, { resetForm }) => {
+  //   addOneArea(values)
+  //     .then((res) => {
+  //       toast.success(`${values.name} added successfully`);
+  //       resetForm();
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message || "Something went wrong with adding area");
+  //     });
+  // };
+  // const onSubmitSalesRoute = (values, { resetForm }) => {
+  //   addOneSalesRoute(values)
+  //     .then((res) => {
+  //       toast.success(`${values.name} added successfully`);
+  //       resetForm();
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message || "Something went wrong with adding route");
+  //     });
+  // };
+  // const onSubmitCategory = (values, { resetForm }) => {
+  //   addOneCategory(values, values.type)
+  //     .then((res) => {
+  //       toast.success(`${values.name} added successfully`);
+  //       resetForm();
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message || "Something went wrong with adding category");
+  //     });
+  // };
+  // const onSubmitEmployee = (values, { resetForm }) => {
+  //   addOneEmployee(values)
+  //     .then((res) => {
+  //       toast.success(`${values.name} added successfully`);
+  //       resetForm();
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message || "Something went wrong with adding employee");
+  //     });
+  // };
   // const products = [
   //     {
   //       id: "qwertyuiop",

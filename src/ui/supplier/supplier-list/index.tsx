@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { Modal } from "react-bootstrap";
 import { getAllSuppliers, editSupplier } from "../../../parser/supplier";
 import SupplierForm from "../supplier-form";
-import ButtonComponent from "../../common/components/button-component";
 
 interface ComponentProps {
   suppliers?: any[];
@@ -16,7 +15,7 @@ interface ComponentProps {
 
 const SupplierList: React.FC<ComponentProps> = (props) => {
   const classes = useStylesFromThemeFunction();
-  const [tableHeadings, setTableHeadings] = React.useState([
+  const [tableHeadings] = React.useState([
     "id",
     "Name",
     "State",
@@ -25,7 +24,7 @@ const SupplierList: React.FC<ComponentProps> = (props) => {
     "Address",
     "Actions",
   ] as string[]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading] = React.useState(false);
   const [selectedSupplier, setSelectedSupplier] = React.useState({} as any);
   const [suppliers, setSuppliers] = React.useState(
     props?.suppliers as any[] | [] as any[]
@@ -38,12 +37,6 @@ const SupplierList: React.FC<ComponentProps> = (props) => {
   //   setSelectedSupplier(Supplier);
   //   setShowEditModal(true);
   // }
-  React.useEffect(() => {
-    getAllSuppliers().then((res) => {
-      setSuppliers(res);
-      renderTableData();
-    });
-  }, []);
 
   const handleRemoveSupplier = (Supplier: any) => {
     try {
@@ -107,7 +100,13 @@ const SupplierList: React.FC<ComponentProps> = (props) => {
       );
     });
   };
-
+  React.useEffect(() => {
+    getAllSuppliers().then((res) => {
+      setSuppliers(res);
+      renderTableData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   if (suppliers?.length !== 0) {
     renderTableData();
   }
