@@ -14,7 +14,8 @@ export const getOrder = async (id: string) => {
 };
 
 export const getOrders = async () => {
-  return await getDocuments(ORDERS_COLLECTION);
+  const orders = await getDocuments(ORDERS_COLLECTION);
+  return orders.map((order) => ({ ...order.data(), ref: order.ref }));
 };
 
 export const addOrder = async (data: any) => {

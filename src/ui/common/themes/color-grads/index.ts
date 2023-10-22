@@ -128,7 +128,7 @@ export const getComponentColors = () => {
   const themeColors = getThemeColors();
   return {
     PRIMARY: {
-      BACKGROUND: themeColors[60],
+      BACKGROUND: themeColors[50],
       TEXT_COLOR: BLACKS[10],
       OUTLINE_BACKGROUND: themeColors[10],
       OUTLINE: themeColors[60],

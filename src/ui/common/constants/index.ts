@@ -1,3 +1,8 @@
+import { createBrowserHistory } from "history";
+
+export default createBrowserHistory();
+
+export const LOGIN_PATH = "/login";
 export const LOCAL_DB_FILE_NAME = "db.json";
 export const LOCAL_DB_FILE_PATH = `../../../db/${LOCAL_DB_FILE_NAME}`;
 export const DEFAULT_CURRENCY = "PKR";
@@ -23,3 +28,12 @@ export const COLOR_OPACITY = {
   "90": 90,
   "100": 100,
 };
+
+export const GLOBAL_DATE_TIME_FORMAT = "hh:mma DD/MM/YYYY";
+export enum USER_TYPES {
+  CUSTOMER = "CUSTOMER",
+  SUPPLIER = "SUPPLIER",
+  EMPLOYEE = "EMPLOYEE",
+  ADMIN = "ADMIN",
+  SUPER_ADMIN = "SUPER_ADMIN",
+}

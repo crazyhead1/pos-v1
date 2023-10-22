@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Table from "../../common/components/table";
 import { getOrders } from "../../../data-management/cloud/firebase/firestore/order";
 
@@ -8,75 +8,39 @@ interface ComponentProps {
 
 const OrderList: React.FC<ComponentProps> = (props) => {
   const [tableHeadings] = React.useState([
-    "id",
-    "Title",
-    "Units in Stock",
-    "Price",
-    "category",
-    "description",
+    "Customer",
+    "Products",
+    "Total",
+    "Date Time",
   ] as string[]);
   const [isLoading] = React.useState(false);
   const [orders, seOrders] = React.useState(
     props?.orders as any[] | [] as any[]
   );
 
-  // const handleCloseEditModal = () => setShowEditModal(false);
-  // const handleShowEditModal = (product: any) => {
-  //   setSelectedProduct(product);
-  //   setShowEditModal(true);
-  // }
   React.useEffect(() => {
     getOrders().then((res) => {
+      console.log({ res });
       seOrders(res);
-      renderTableData();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const handleRemoveProduct = (product: any) => {
-  //   try {
-  //     if (window.confirm("Are you sure you want to remove this product?")) {
-  //       // call delete product api here
-
-  //       console.log(product);
-  //       toast.success(`${product.name} removed successfully`);
-  //     } else {
-  //       throw new Error("Product not removed");
-  //     }
-  //   } catch (e) {
-  //     toast.error(e.message || "Error while removing product");
-  //     console.log(e.message);
-  //   }
-  // };
   const onViewOrder = (order: any) => {
     console.log({ order });
   };
-  // const handleEditProduct = (product: any) => {
-  //   // setSelectedProduct(product);
-  //   // setShowProductUpdateModal(true);
-  // };
-  // const handleUpdate = (updatedProduct: any) => {
-
-  // };
-  const renderTableData = () => {
-    return orders?.map((product) => {
+  const renderTableData = useMemo(() => {
+    return orders?.map((order) => {
       return (
-        <tr key={product.id} onDoubleClick={() => onViewOrder(product)}>
-          <td>{product.id}</td>
-          <td>{product.name}</td>
-          <td>{product.unitsInStock}</td>
-          <td>{product.unitPrice}</td>
-          <td>{product.category}</td>
-          <td>{product.description}</td>
+        <tr key={order.id} onDoubleClick={() => onViewOrder(order)}>
+          <td>{order.customerName}</td>
+          <td>{order.products?.length}</td>
+          <td>{order.total}</td>
+          <td>{order.dateTime}</td>
         </tr>
       );
     });
-  };
-
-  if (orders?.length !== 0) {
-    renderTableData();
-  }
-
+  }, [orders]);
   return (
     <>
       <Table

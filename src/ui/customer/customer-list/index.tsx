@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import EditIcon from "../../../assets/component/EditIcon";
 import RemoveIcon from "../../../assets/component/RemoveIcon";
 import { Colors } from "../../common/colors";
@@ -40,7 +40,7 @@ const CustomerList: React.FC<ComponentProps> = (props) => {
   React.useEffect(() => {
     getAllCustomers().then((res) => {
       setCustomers(res);
-      renderTableData();
+      // renderTableData();
     });
   }, []);
 
@@ -73,7 +73,7 @@ const CustomerList: React.FC<ComponentProps> = (props) => {
         toast.error(e.message || "Error while updating Customer");
       });
   };
-  const renderTableData = () => {
+  const renderTableData = useMemo(() => {
     return customers?.map((customer) => {
       return (
         <tr
@@ -104,11 +104,7 @@ const CustomerList: React.FC<ComponentProps> = (props) => {
         </tr>
       );
     });
-  };
-
-  if (customers?.length !== 0) {
-    renderTableData();
-  }
+  }, [customers]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import EditIcon from "../../../assets/component/EditIcon";
 import RemoveIcon from "../../../assets/component/RemoveIcon";
 import { Colors } from "../../common/colors";
@@ -42,8 +42,9 @@ const InventoryList: React.FC<ComponentProps> = (props) => {
   // }
   React.useEffect(() => {
     getProductsFromInventory().then((res) => {
+      console.log({ res });
       setProducts(res);
-      renderTableData();
+      // renderTableData();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -77,7 +78,7 @@ const InventoryList: React.FC<ComponentProps> = (props) => {
         toast.error(e.message || "Error while updating product");
       });
   };
-  const renderTableData = () => {
+  const renderTableData = useMemo(() => {
     return products?.map((product) => {
       return (
         <tr key={product.id} onDoubleClick={() => handleEditProduct(product)}>
@@ -106,11 +107,11 @@ const InventoryList: React.FC<ComponentProps> = (props) => {
         </tr>
       );
     });
-  };
+  }, products);
 
-  if (products?.length !== 0) {
-    renderTableData();
-  }
+  // if (products?.length !== 0) {
+  //   renderTableData();
+  // }
 
   return (
     <>

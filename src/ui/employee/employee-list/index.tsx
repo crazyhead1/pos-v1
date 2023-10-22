@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import EditIcon from "../../../assets/component/EditIcon";
 import RemoveIcon from "../../../assets/component/RemoveIcon";
 import { Colors } from "../../common/colors";
@@ -41,7 +41,6 @@ const EmployeeList: React.FC<ComponentProps> = (props) => {
   React.useEffect(() => {
     getAllEmployees().then((res) => {
       setEmployees(res);
-      renderTableData();
     });
   }, []);
 
@@ -74,7 +73,7 @@ const EmployeeList: React.FC<ComponentProps> = (props) => {
         toast.error(e.message || "Error while updating Employee");
       });
   };
-  const renderTableData = () => {
+  const renderTableData = useMemo(() => {
     return employees?.map((Employee) => {
       return (
         <tr
@@ -106,11 +105,7 @@ const EmployeeList: React.FC<ComponentProps> = (props) => {
         </tr>
       );
     });
-  };
-
-  if (employees?.length !== 0) {
-    renderTableData();
-  }
+  }, [employees]);
 
   return (
     <>
