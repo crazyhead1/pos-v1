@@ -151,9 +151,9 @@ const ButtonComponent: React.FC<ComponentProps> = ({
     <button
       style={style}
       type={type}
-      className={`${className} ${
+      className={`${className} ${handleVariant()} ${handleSize()} ${
         classes.default
-      } ${handleVariant()} ${handleSize()}`}
+      }`}
       onClick={onClick}
       disabled={disabled}
     >

@@ -72,7 +72,7 @@ export const Invoice: React.FC<ComponentProps> = ({
     setAmountPaid(amount);
     setAmountReturned(Math.round(amount - amountDue));
   };
-
+  console.log({ amountPaid, isLoading, isPrintEnable });
   return (
     <div className={classes.totalBillContainer}>
       <h1 className={classes.title}>
@@ -150,7 +150,7 @@ export const Invoice: React.FC<ComponentProps> = ({
           }}
           isLoading={isLoading}
           //   size={btnSize.M}
-          disabled={amountPaid <= 0 || isLoading || isPrintEnable}
+          disabled={amountPaid <= 0 || isLoading}
           variant={btnType.PRIMARY}
         >
           Confirm

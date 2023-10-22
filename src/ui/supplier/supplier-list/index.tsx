@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import EditIcon from "../../../assets/component/EditIcon";
 import RemoveIcon from "../../../assets/component/RemoveIcon";
 import { Colors } from "../../common/colors";
@@ -67,7 +67,7 @@ const SupplierList: React.FC<ComponentProps> = (props) => {
         toast.error(e.message || "Error while updating Supplier");
       });
   };
-  const renderTableData = () => {
+  const renderTableData = useMemo(() => {
     return suppliers?.map((Supplier) => {
       return (
         <tr
@@ -99,17 +99,13 @@ const SupplierList: React.FC<ComponentProps> = (props) => {
         </tr>
       );
     });
-  };
+  }, [suppliers]);
   React.useEffect(() => {
     getAllSuppliers().then((res) => {
       setSuppliers(res);
-      renderTableData();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (suppliers?.length !== 0) {
-    renderTableData();
-  }
 
   return (
     <>

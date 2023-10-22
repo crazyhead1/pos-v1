@@ -16,7 +16,6 @@ export const fetchProductList = () => {
 
     try {
       const productsList = await getProductsFromInventory();
-      console.log({ productsList });
       dispatch(fetchProductsSuccess(productsList));
     } catch (error) {
       dispatch(fetchProductsFailure(error.message));

@@ -1,156 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AddNewInventory from "./add-new-inventory";
 import InventoryList from "./inventory-list";
 import { ComponentProps } from "./Inventory";
-// import "boxicons";
-import { Drawer } from "../common/components/drawer/Drawer";
-import ButtonComponent from "../common/components/button-component";
-import { Text } from "../common/components/typography";
-import { btnType } from "../common/components/button-component/ButtonComponent.types";
+import ListLayout from "../app-layout/list-layout";
+import { TypeProductStatus } from "../../redux/store/store.types";
+import { addProductIntoInventory } from "../../parser/inventory";
+import toast from "react-hot-toast";
+import { addLog } from "../../services/cloud/firebase/logging";
 
 const Inventory: React.FC<ComponentProps> = () => {
-  // const [activeTab,setActiveTab] = useState('pos');
-  // const [showSidebar, setShowSidebar] = useState(true);
-  const [showAddInventoryDrawer, setShowAddInventoryDrawer] = useState(false);
-  // const onSubmitSupplier = (values,{resetForm})=>{
-  //     addOneSupplier(values).then(res => {
-  //         toast.success(`${values.name} added successfully`);
-  //         resetForm();
-  //       }).catch(err => {
-  //         toast.error(err.message || 'Something went wrong with adding supplier');
-  //       });
-  // }
-  // const onSubmitCustomer = (values,{resetForm})=>{
-  //     addOneCustomer(values).then(res => {
-  //         toast.success(`${values.name} added successfully`);
-  //         resetForm();
-  //       }).catch(err => {
-  //         toast.error(err.message || 'Something went wrong with adding customer');
-  //       });
-  // }
-  // const onSubmitTown = (values,{ resetForm })=>{
-  //     addtown(values).then(res => {
-  //         toast.success(`${values.name} added successfully`);
-  //         resetForm();
-  //       }).catch(err => {
-  //         toast.error(err.message || 'Something went wrong with adding town');
-  //       });
-  // }
-  // const onSubmitArea = (values,{resetForm})=>{
-  //     addOneArea(values).then(res => {
-  //         toast.success(`${values.name} added successfully`);
-  //         resetForm();
-  //       }).catch(err => {
-  //         toast.error(err.message || 'Something went wrong with adding area');
-  //       });
-  // }
-  // const onSubmitSalesRoute = (values,{resetForm})=>{
-  //     addOneSalesRoute(values).then(res => {
-  //         toast.success(`${values.name} added successfully`);
-  //         resetForm();
-  //       }).catch(err => {
-  //         toast.error(err.message || 'Something went wrong with adding route');
-  //       });
-  // }
-  // const onSubmitCategory = (values,{resetForm})=>{
-  //     addOneCategory(values,values.type).then(res => {
-  //         toast.success(`${values.name} added successfully`);
-  //         resetForm();
-  //       }).catch(err => {
-  //         toast.error(err.message || 'Something went wrong with adding category');
-  //       });
-  // }
-  // const onSubmitEmployee = (values,{resetForm})=>{
-  //   addOneEmployee(values).then(res => {
-  //     toast.success(`${values.name} added successfully`);
-  //     resetForm();
-  //   }).catch(err => {
-  //     toast.error(err.message || 'Something went wrong with adding employee');
-  //   });
-  // }
-  // const products = [
-  //     {
-  //       id: "qwertyuiop",
-  //       name: 'Product 1',
-  //       unitPrice: 10,
-  //       unitsInStock: 10,
-  //     },
-  //     {
-  //       id: "asdfghjkl",
-  //       name: 'Product 2',
-  //       unitPrice: 20,
-  //       unitsInStock: 20,
-  //     },
-  //     {
-  //       id: "zxcvbnm",
-  //       name: 'Product 3',
-  //       unitPrice: 30,
-  //       unitsInStock: 30,
-  //     }
-  //   ];
-
-  // const renderComponent = (key: string) =>{
-  //   switch (key) {
-  //     case "add":
-  //       return <AddNewInventory />;
-  //     break;
-  //     case "list":
-  //       return <InventoryList />;
-  //     break;
-  //     case "POS":
-  //       return <POSEngine/>;
-  //     break;
-  //     case "supplier":
-  //       return <SupplierForm onSubmit={onSubmitSupplier}/>;
-  //     break;
-  //     case "customer":
-  //       return <CustomerForm onSubmit={onSubmitCustomer}/>;
-  //     break;
-  //     case "town":
-  //       return <TownForm onSubmit={onSubmitTown}/>;
-  //     break;
-  //     case "area":
-  //       return <AreaForm onSubmit={onSubmitArea}/>;
-  //     break;
-  //     case "salesRoute":
-  //       return <SalesRouteForm onSubmit={onSubmitSalesRoute}/>;
-  //     break;
-  //     case "category":
-  //       return <CategoryForm onSubmit={onSubmitCategory}/>;
-  //     break;
-  //     case "employee":
-  //       return <EmployeeForm onSubmit={onSubmitEmployee}/>;
-  //     break;
-  //     default:
-  //       break;
-  //   }
-  // }
-  const toggleDrawer = () => {
-    setShowAddInventoryDrawer(!showAddInventoryDrawer);
+  const [closeDrawer, setCloseDrawer] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      if (closeDrawer) {
+        setCloseDrawer(false);
+      }
+    }, 200);
+  }, [closeDrawer]);
+  const onAddProduct = async (values) => {
+    const productPayload = {
+      ...values,
+      status:
+        values.unitsInStock > 0
+          ? TypeProductStatus.AVAILABLE
+          : TypeProductStatus.OUT_OF_STOCK,
+      createdAt: new Date().getTime().toString(),
+      updatedAt: new Date().getTime().toString(),
+    };
+    addProductIntoInventory(productPayload)
+      .then((res) => {
+        toast.success(`${values.name} added successfully`);
+        setCloseDrawer(true);
+      })
+      .catch((e) => {
+        toast.error(e.message || "Error while adding product");
+        addLog({
+          message: e.message || "Error while adding product",
+          type: "error",
+          path: "inventory/add-new-inventory",
+        });
+      });
   };
   return (
-    <>
-      <ButtonComponent onClick={toggleDrawer} variant={btnType.PRIMARY}>
-        <Text>Add Item</Text>
-      </ButtonComponent>
-      <Drawer
-        onClose={toggleDrawer}
-        open={showAddInventoryDrawer}
-        subTitle="Add new item to inventory"
-        title="Add Inventory"
-      >
-        <AddNewInventory />
-      </Drawer>
-      <InventoryList />
-    </>
-    // <Tabs defaultActiveKey="add" className="mb-3">
-    //   <Tab eventKey="add" title="Add Product" onClick={toggleDrawer}>
-
-    //   </Tab>
-    //   <Tab eventKey="list" title="Inventory">
-    //   </Tab>
-    // </Tabs>
+    <ListLayout
+      title="inventory"
+      drawerComponent={<AddNewInventory onSubmit={onAddProduct} />}
+      listComponent={<InventoryList />}
+      closeDrawer={closeDrawer}
+    />
   );
 };
 

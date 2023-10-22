@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Collapse, Nav, Row, Tab } from "react-bootstrap";
 import { POSEngine } from "../pos-engine";
 import { useStylesFromThemeFunction, ComponentProps } from "./AppLayout";
@@ -10,141 +10,73 @@ import SalesRoute from "../sales-route";
 import Order from "../order";
 import Sales from "../sales";
 import Setting from "../setting";
+import {
+  Route,
+  Routes,
+  unstable_HistoryRouter as HistoryRouter,
+} from "react-router-dom";
+import Login from "../auth/login";
+import ResetPassword from "../auth/reset-password";
+import Signup from "../auth/signup";
+import VerifyEmail from "../auth/verify-email";
+import { adminRoutes, organizationRoutes } from "./routes";
+import { useSelector } from "react-redux";
+import history from "../common/constants";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../services/cloud";
 
 const AppLayout: React.FC<ComponentProps> = () => {
   const classes = useStylesFromThemeFunction();
-  // const [activeTab,setActiveTab] = useState('pos');
   const [showSidebar, setShowSidebar] = useState(true);
-  // const onSubmitSupplier = (values, { resetForm }) => {
-  //   addOneSupplier(values)
-  //     .then((res) => {
-  //       toast.success(`${values.name} added successfully`);
-  //       resetForm();
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message || "Something went wrong with adding supplier");
-  //     });
-  // };
-  // const onSubmitCustomer = (values, { resetForm }) => {
-  //   addOneCustomer(values)
-  //     .then((res) => {
-  //       toast.success(`${values.name} added successfully`);
-  //       resetForm();
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message || "Something went wrong with adding customer");
-  //     });
-  // };
-  // const onSubmitTown = (values, { resetForm }) => {
-  //   addtown(values)
-  //     .then((res) => {
-  //       toast.success(`${values.name} added successfully`);
-  //       resetForm();
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message || "Something went wrong with adding town");
-  //     });
-  // };
-  // const onSubmitArea = (values, { resetForm }) => {
-  //   addOneArea(values)
-  //     .then((res) => {
-  //       toast.success(`${values.name} added successfully`);
-  //       resetForm();
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message || "Something went wrong with adding area");
-  //     });
-  // };
-  // const onSubmitSalesRoute = (values, { resetForm }) => {
-  //   addOneSalesRoute(values)
-  //     .then((res) => {
-  //       toast.success(`${values.name} added successfully`);
-  //       resetForm();
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message || "Something went wrong with adding route");
-  //     });
-  // };
-  // const onSubmitCategory = (values, { resetForm }) => {
-  //   addOneCategory(values, values.type)
-  //     .then((res) => {
-  //       toast.success(`${values.name} added successfully`);
-  //       resetForm();
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message || "Something went wrong with adding category");
-  //     });
-  // };
-  // const onSubmitEmployee = (values, { resetForm }) => {
-  //   addOneEmployee(values)
-  //     .then((res) => {
-  //       toast.success(`${values.name} added successfully`);
-  //       resetForm();
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.message || "Something went wrong with adding employee");
-  //     });
-  // };
-  // const products = [
-  //     {
-  //       id: "qwertyuiop",
-  //       name: 'Product 1',
-  //       unitPrice: 10,
-  //       unitsInStock: 10,
-  //     },
-  //     {
-  //       id: "asdfghjkl",
-  //       name: 'Product 2',
-  //       unitPrice: 20,
-  //       unitsInStock: 20,
-  //     },
-  //     {
-  //       id: "zxcvbnm",
-  //       name: 'Product 3',
-  //       unitPrice: 30,
-  //       unitsInStock: 30,
-  //     }
-  //   ];
 
-  // const renderComponent = (key: string) =>{
-  //   switch (key) {
-  //     case "add":
-  //       return <AddNewInventory />;
-  //     break;
-  //     case "list":
-  //       return <InventoryList />;
-  //     break;
-  //     case "POS":
-  //       return <POSEngine/>;
-  //     break;
-  //     case "supplier":
-  //       return <SupplierForm onSubmit={onSubmitSupplier}/>;
-  //     break;
-  //     case "customer":
-  //       return <CustomerForm onSubmit={onSubmitCustomer}/>;
-  //     break;
-  //     case "town":
-  //       return <TownForm onSubmit={onSubmitTown}/>;
-  //     break;
-  //     case "area":
-  //       return <AreaForm onSubmit={onSubmitArea}/>;
-  //     break;
-  //     case "salesRoute":
-  //       return <SalesRouteForm onSubmit={onSubmitSalesRoute}/>;
-  //     break;
-  //     case "category":
-  //       return <CategoryForm onSubmit={onSubmitCategory}/>;
-  //     break;
-  //     case "employee":
-  //       return <EmployeeForm onSubmit={onSubmitEmployee}/>;
-  //     break;
-  //     default:
-  //       break;
-  //   }
-  // }
+  const [currentUser, setCurrentUser] = useState({} as any);
+  useEffect(() => {
+    if (!localStorage.getItem("tkn")) {
+      history.push(`/login`);
+    }
+  }, [localStorage.getItem("tkn")]);
 
+  useEffect(() => {
+    onAuthStateChanged(auth.getInstance(), (user) => {
+      setCurrentUser(user);
+    });
+  }, []);
+
+  const isAuthenticated = () => {
+    if (!localStorage.getItem("tkn")) {
+      return false;
+    }
+    return true;
+  };
+  const isAdmin = () => {
+    if (!localStorage.getItem("isAdmin")) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div>
+      <HistoryRouter history={history}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/signup-password" element={<Signup />} />
+          <Route path="/verify-password" element={<VerifyEmail />} />
+
+          {/* <Route  */}
+          {isAuthenticated() && (
+            <>
+              {(isAdmin() ? adminRoutes : organizationRoutes).map(
+                ({ path, component: Component }) => (
+                  <Route path={path} element={<Component />} key={path} />
+                )
+              )}
+            </>
+          )}
+          <Route path="/" element={isAdmin() ? <></> : <POSEngine />} />
+        </Routes>
+      </HistoryRouter>
+
       <Tab.Container defaultActiveKey="pos">
         <Row>
           <Col sm={3}>
@@ -170,13 +102,13 @@ const AppLayout: React.FC<ComponentProps> = () => {
                         </div>
                       </Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    {/* <Nav.Item>
                       <Nav.Link eventKey="sales">
                         <div className={classes.link}>
                           <i className="bx bxs-pie-chart-alt-2"></i> Sales
                         </div>
                       </Nav.Link>
-                    </Nav.Item>
+                    </Nav.Item> */}
                     <Nav.Item>
                       <Nav.Link eventKey="orders">
                         <div className={classes.link}>
@@ -184,7 +116,7 @@ const AppLayout: React.FC<ComponentProps> = () => {
                         </div>
                       </Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    {/* <Nav.Item>
                       <Nav.Link eventKey="sales-route">
                         <div className={classes.link}>
                           <i className="bx bxs-map"></i> Sales Route
@@ -197,7 +129,7 @@ const AppLayout: React.FC<ComponentProps> = () => {
                           <i className="bx bxs-category"></i> Categories
                         </div>
                       </Nav.Link>
-                    </Nav.Item>
+                    </Nav.Item> */}
                     <Nav.Item>
                       <Nav.Link eventKey="users">
                         <div className={classes.link}>
@@ -240,18 +172,18 @@ const AppLayout: React.FC<ComponentProps> = () => {
                 <Tab.Pane eventKey="inventory">
                   <Inventory />
                 </Tab.Pane>
-                <Tab.Pane eventKey="sales">
+                {/* <Tab.Pane eventKey="sales">
                   <Sales />
-                </Tab.Pane>
+                </Tab.Pane> */}
                 <Tab.Pane eventKey="orders">
                   <Order />
                 </Tab.Pane>
-                <Tab.Pane eventKey="sales-route">
+                {/* <Tab.Pane eventKey="sales-route">
                   <SalesRoute />
                 </Tab.Pane>
                 <Tab.Pane eventKey="categories">
                   <Category />
-                </Tab.Pane>
+                </Tab.Pane> */}
                 <Tab.Pane eventKey="users">
                   <Users />
                 </Tab.Pane>

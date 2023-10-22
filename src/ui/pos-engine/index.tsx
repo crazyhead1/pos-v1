@@ -10,7 +10,11 @@ import { Colors } from "../common/colors";
 import toast from "react-hot-toast";
 import { addLog } from "../../services/cloud/firebase/logging";
 import { addOrderIntoPOS } from "../../parser/orders";
-import { DEFAULT_DISCOUNT_RATE, DEFAULT_TAX_RATE } from "../common/constants";
+import {
+  DEFAULT_DISCOUNT_RATE,
+  DEFAULT_TAX_RATE,
+  GLOBAL_DATE_TIME_FORMAT,
+} from "../common/constants";
 import { btnType } from "../common/components/button-component/ButtonComponent.types";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductList } from "../../redux/actions/product.actions";
@@ -20,6 +24,7 @@ import {
   getLastInvoiceNumber,
 } from "../../data-management/cloud/firebase/database/invoice/invoice.operations";
 import { generateNextInvoiceNumber } from "../../utils/utilFunctions";
+import dayjs from "dayjs";
 
 export const POSEngine: React.FC<ComponentProps> = ({
   label,
@@ -79,44 +84,43 @@ export const POSEngine: React.FC<ComponentProps> = ({
   const handleIncreaseQuantity = (concernedProduct: any) => {
     if (!concernedProduct) return;
     isLoading = true;
-    setAddedProducts(
-      addedProducts.filter((product) => {
-        if (product.name === concernedProduct.name) {
-          if (parseInt(product.quantity) > 1) {
-            isLoading = false;
-            return {
-              ...product,
-              quantity: parseInt(product.quantity) + 1,
-            };
-          }
-          toast.error("No more units in stock");
-          isLoading = false;
-          return product;
-        }
-        return null;
-      })
-    );
+    console.log({ addedProducts });
+    let newAddedProductList = JSON.parse(JSON.stringify(addedProducts));
+    if (concernedProduct.quantity >= concernedProduct.unitsInStock) {
+      toast.error("No more units stock");
+      isLoading = false;
+      return;
+    }
+    newAddedProductList = newAddedProductList.map((item) => {
+      if (item.id === concernedProduct.id) {
+        return {
+          ...item,
+          quantity: parseInt(item.quantity, 10) + 1,
+        };
+      }
+      return item;
+    });
+    setAddedProducts(newAddedProductList);
   };
   const handleDecreaseQuantity = (concernedProduct: any) => {
     if (!concernedProduct) return;
     isLoading = true;
-    setAddedProducts(
-      addedProducts.filter((product) => {
-        if (product.name === concernedProduct.name) {
-          if (parseInt(product.quantity) > 1) {
-            isLoading = false;
-            return {
-              ...product,
-              quantity: parseInt(product.quantity) - 1,
-            };
-          }
-          toast.error("Minimum quantity is 1");
-          isLoading = false;
-          return product;
-        }
-        return null;
-      })
-    );
+    let newAddedProductList = JSON.parse(JSON.stringify(addedProducts));
+    if (concernedProduct.quantity <= 1) {
+      toast.error("Minimum quantity is 1");
+      isLoading = false;
+      return;
+    }
+    newAddedProductList = newAddedProductList.map((item) => {
+      if (item.id === concernedProduct.id) {
+        return {
+          ...item,
+          quantity: parseInt(item.quantity, 10) - 1,
+        };
+      }
+      return item;
+    });
+    setAddedProducts(newAddedProductList);
   };
 
   const renderAddedProducts = useMemo(() => {
@@ -251,6 +255,11 @@ export const POSEngine: React.FC<ComponentProps> = ({
           (tempSubtotal + tempSubtotal * DEFAULT_TAX_RATE) *
             DEFAULT_DISCOUNT_RATE
       ),
+      customerName: "",
+      customerId: "",
+      employeeName: "",
+      employeeId: "",
+      dateTime: dayjs().format(GLOBAL_DATE_TIME_FORMAT),
     };
 
     addOrderIntoPOS(orderPayload)
