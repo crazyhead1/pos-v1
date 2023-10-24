@@ -3,7 +3,7 @@ name: Node.js CI with Docker
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger the workflow on
+      - DevOps  # Change this to the branch you want to trigger the workflow on
 
 env:
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
