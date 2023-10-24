@@ -7,7 +7,7 @@ on:
 
 env:
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
-  DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
 
 jobs:
   build:
@@ -44,4 +44,4 @@ jobs:
           # The example below assumes your repository name is "your-username/your-repo-name".
           # The final image will be named "your-username/your-repo-name:latest".
           # You can replace "your-username" and "your-repo-name" with appropriate names.
-          tags: mhassaankhokhar/ci
+          tags: mhassaankhokhar/stella
