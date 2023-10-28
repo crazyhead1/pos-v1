@@ -1,10 +1,38 @@
+import Login from "../auth/login";
+import ResetPassword from "../auth/reset-password";
+import Signup from "../auth/signup";
+import VerifyEmail from "../auth/verify-email";
 import Inventory from "../inventory";
 import Order from "../order";
 import { POSEngine } from "../pos-engine";
 import Setting from "../setting";
 import Users from "../users";
 
+const authRoutes = [
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/reset-password",
+    name: "Reset Password",
+    component: ResetPassword,
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
+  },
+  {
+    path: "/verify-email",
+    name: "Verify Email",
+    component: VerifyEmail,
+  },
+];
+
 export const organizationRoutes = [
+  ...authRoutes,
   {
     path: "/organization/pos",
     name: "POS",
@@ -33,6 +61,7 @@ export const organizationRoutes = [
 ];
 
 export const adminRoutes = [
+  ...authRoutes,
   {
     path: "/organization/pos",
     name: "POS",

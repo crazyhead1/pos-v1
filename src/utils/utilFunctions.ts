@@ -1,3 +1,7 @@
+import { User } from "firebase/auth";
+import toast from "react-hot-toast";
+import history from "../ui/common/constants";
+
 export const generateNextInvoiceNumber = (initialNumber = "AAA0000000") => {
   if (!/^[A-Z]{3}\d{7}$/.test(initialNumber)) {
     throw new Error('Invalid input format. It should be like "AAA0000000".');
@@ -36,4 +40,42 @@ export const generateNextInvoiceNumber = (initialNumber = "AAA0000000") => {
 
     return sequentialNumber;
   };
+};
+
+export const isEmailValid = (email: string): boolean => {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  return emailPattern.test(email);
+};
+
+export const isStrongPassword = (password: string): boolean => {
+  if (password.length < 8) {
+    return false;
+  }
+
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
+
+  return hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+};
+
+export const addUserInLocalstorage = (user: User) => {
+  user
+    .getIdToken()
+    .then((res) => {
+      localStorage.setItem("tkn", res);
+    })
+    .catch((error) => toast.error("Unable to generate idToken"));
+  localStorage.setItem("uid", user.uid);
+  user.email && localStorage.setItem("email", user.email);
+  user.photoURL && localStorage.setItem("photoURL", user.photoURL);
+};
+
+export const removeUserFromLocalstorage = () => {
+  localStorage.removeItem("tkn");
+  localStorage.removeItem("uid");
+  localStorage.removeItem("email");
+  localStorage.removeItem("photoURL");
 };
