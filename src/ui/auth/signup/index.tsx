@@ -20,8 +20,11 @@ import {
   isStrongPassword,
 } from "../../../utils/utilFunctions";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Signup: FC = (props) => {
+  const navigate = useNavigate();
+
   const handleSubmit = (events) => {
     events.preventDefault();
     console.log({ email: events.target.email.value });
@@ -142,7 +145,13 @@ const Signup: FC = (props) => {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link
+                  variant="body2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/login");
+                  }}
+                >
                   {"Already have an account? Login here"}
                 </Link>
               </Grid>
