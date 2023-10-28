@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 
-const VerifyEmail = (props) => {
+const VerifyEmail: FC = (props) => {
   return <div></div>;
 };
 

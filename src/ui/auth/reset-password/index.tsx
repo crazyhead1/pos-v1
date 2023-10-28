@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 
-const ResetPassword = (props) => {
+const ResetPassword: FC = (props) => {
   return <div></div>;
 };
 

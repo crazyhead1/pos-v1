@@ -1,11 +1,13 @@
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import { auth } from "../../../../services/cloud";
 import toast from "react-hot-toast";
 import history, { LOGIN_PATH } from "../../../../ui/common/constants";
+import { removeUserFromLocalstorage } from "../../../../utils/utilFunctions";
 
 export const register = ({ email, password, confirmPassword }) => {
   const validatePassword = () => {
@@ -20,25 +22,20 @@ export const register = ({ email, password, confirmPassword }) => {
   };
   if (validatePassword()) {
     // Create a new user with email and password using firebase
-    createUserWithEmailAndPassword(auth.getInstance(), email, password)
-      .then((res) => {
-        console.log(res.user);
-      })
-      .catch((err) => {
-        toast.error("Login failed! ", err);
-      });
+    return createUserWithEmailAndPassword(auth.getInstance(), email, password);
   }
 };
 
-export const signOff = (): void => {
-  signOut(auth.getInstance())
-    .then((res) => {
-      localStorage.removeItem("tkn");
-      history.push(LOGIN_PATH);
-    })
-    .catch((error) => {
-      toast.error("Unable to signout ", error);
-    });
+export const login = ({ email, password }) => {
+  if (!email && !password) {
+    toast.error("Email and Password is required");
+    return;
+  }
+  return signInWithEmailAndPassword(auth.getInstance(), email, password);
+};
+
+export const signOff = () => {
+  return signOut(auth.getInstance());
 };
 
 export const sendVerificationEmail = () => {
