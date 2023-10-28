@@ -17,8 +17,10 @@ import { login } from "../../../data-management/cloud/firebase/auth";
 import { addUserInLocalstorage } from "../../../utils/utilFunctions";
 import toast from "react-hot-toast";
 import history from "../../common/constants";
+import { useNavigate } from "react-router-dom";
 
 const Login: FC = (props) => {
+  const navigate = useNavigate();
   const handleSubmit = (events) => {
     events.preventDefault();
     console.log({ email: events.target.email.value });
@@ -122,7 +124,13 @@ const Login: FC = (props) => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link
+                  variant="body2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/signup");
+                  }}
+                >
                   {"Don't have an account? Register here"}
                 </Link>
               </Grid>
