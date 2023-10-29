@@ -49,7 +49,7 @@ jobs:
           # You can replace "your-username" and "your-repo-name" with appropriate names.
           tags: mhassaankhokhar/stella
       - name: Deploy
-        uses: appleboy/scp-action@v0
+        uses: appleboy/scp-action@v1
         with:
           host: 146.190.4.216
           username: root
