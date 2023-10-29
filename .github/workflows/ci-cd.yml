@@ -48,3 +48,12 @@ jobs:
           # The final image will be named "your-username/your-repo-name:latest".
           # You can replace "your-username" and "your-repo-name" with appropriate names.
           tags: mhassaankhokhar/stella
+      - name: Deploy
+        uses: appleboy/scp-action@v0
+        with:
+          host: 146.190.4.216
+          username: root
+          password: ${{ secrets.COMPUTE_PASS }}
+          port: 22
+          source: ./deploy.sh
+          target: /root
