@@ -62,6 +62,7 @@ export const isStrongPassword = (password: string): boolean => {
 };
 
 export const addUserInLocalstorage = (user: User) => {
+  console.log({ user });
   user
     .getIdToken()
     .then((res) => {
@@ -78,4 +79,22 @@ export const removeUserFromLocalstorage = () => {
   localStorage.removeItem("uid");
   localStorage.removeItem("email");
   localStorage.removeItem("photoURL");
+  localStorage.removeItem("org");
+};
+
+export const isAuthenticated = () => {
+  if (!localStorage.getItem("tkn")) {
+    return false;
+  }
+  return true;
+};
+
+export const isAdmin = (admins) => {
+  const currentUserEmail = localStorage.getItem("email") ?? "";
+  if (!currentUserEmail && admins.length <= 0) {
+    return false;
+  } else if (admins.includes(currentUserEmail)) {
+    return true;
+  }
+  return false;
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Col, Collapse, Nav, Row, Tab } from "react-bootstrap";
 import { POSEngine } from "../pos-engine";
 import { useStylesFromThemeFunction, ComponentProps } from "./AppLayout";
@@ -20,24 +20,20 @@ import { useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../services/cloud";
 import { LOGIN_PATH } from "../common/constants";
+import { isAdmin, isAuthenticated } from "../../utils/utilFunctions";
+import Organisation from "../organisation";
+import { getAllAdmins } from "../../parser/admins";
+import { getAllOrganisations } from "../../parser/organisation";
+import { getAllEmployees } from "../../parser/employee";
 
 const AppLayout: React.FC<ComponentProps> = () => {
   const classes = useStylesFromThemeFunction();
   const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(true);
   const [currentUser, setCurrentUser] = useState({} as any);
-  const isAuthenticated = () => {
-    if (!localStorage.getItem("tkn")) {
-      return false;
-    }
-    return true;
-  };
-  const isAdmin = () => {
-    if (!localStorage.getItem("isAdmin")) {
-      return false;
-    }
-    return true;
-  };
+  const [admins, setAdmins] = useState([] as string[]);
+
+  const isAdminLogin = useMemo(() => isAdmin(admins), [admins]);
 
   useEffect(() => {
     onAuthStateChanged(auth.getInstance(), (user) => {
@@ -45,8 +41,26 @@ const AppLayout: React.FC<ComponentProps> = () => {
     });
 
     if (!isAuthenticated()) {
+      setShowSidebar(false);
       navigate(LOGIN_PATH);
     } else {
+      setShowSidebar(true);
+      getAllAdmins()
+        .then((res) => {
+          setAdmins(res?.[0].admins || []);
+        })
+        .catch((error) => console.log({ error }));
+      getAllEmployees()
+        .then((res) => {
+          const foundEmployee = res?.find(
+            (item) => item.email === localStorage.getItem("email")
+          );
+          console.log({ res, foundEmployee });
+          if (foundEmployee) {
+            localStorage.setItem("org", foundEmployee.organisation ?? "admin");
+          }
+        })
+        .catch((error) => console.log({ error }));
       if (window.location.pathname === "/") {
         navigate("/organization/pos");
         // history.replace(isAdmin ? '/admin/members' : '/provider/members');
@@ -58,6 +72,7 @@ const AppLayout: React.FC<ComponentProps> = () => {
     e.preventDefault();
     navigate(url);
   };
+
   return (
     <>
       {
@@ -67,7 +82,11 @@ const AppLayout: React.FC<ComponentProps> = () => {
               <Col sm={3}>
                 <div
                   className={`${
-                    showSidebar ? classes.tabsWithSidebar : classes.tabs
+                    showSidebar
+                      ? classes.tabsWithSidebar
+                      : isAuthenticated()
+                      ? classes.tabs
+                      : classes.tabsOnAuth
                   }`}
                 >
                   <div className={classes.tabsStyle}>
@@ -159,6 +178,22 @@ const AppLayout: React.FC<ComponentProps> = () => {
                             </div>
                           </Nav.Link>
                         </Nav.Item>
+
+                        {isAdminLogin && (
+                          <Nav.Item>
+                            <Nav.Link
+                              eventKey="organization"
+                              onClick={(e) =>
+                                handleTabClick(e, "/admin/organization")
+                              }
+                            >
+                              <div className={classes.link}>
+                                <i className="bx bxs-brightness"></i>{" "}
+                                Organization
+                              </div>
+                            </Nav.Link>
+                          </Nav.Item>
+                        )}
                       </Nav>
                     </Collapse>
                   </div>
@@ -182,7 +217,9 @@ const AppLayout: React.FC<ComponentProps> = () => {
                 className={`${
                   showSidebar
                     ? classes.contentPanWithSidebar
-                    : classes.contentPan
+                    : isAuthenticated()
+                    ? classes.contentPan
+                    : classes.contentPanOnAuth
                 }`}
               >
                 <Routes>
@@ -211,6 +248,12 @@ const AppLayout: React.FC<ComponentProps> = () => {
                     <Route
                       path="/organization/settings"
                       element={<Setting />}
+                    />
+                  )}
+                  {isAuthenticated() && isAdminLogin && (
+                    <Route
+                      path="/admin/organization"
+                      element={<Organisation />}
                     />
                   )}
                   {/* {isAuthenticated() && (

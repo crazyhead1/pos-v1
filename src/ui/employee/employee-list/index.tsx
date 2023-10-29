@@ -40,6 +40,7 @@ const EmployeeList: React.FC<ComponentProps> = (props) => {
   // }
   React.useEffect(() => {
     getAllEmployees().then((res) => {
+      console.log({ res });
       setEmployees(res);
     });
   }, []);

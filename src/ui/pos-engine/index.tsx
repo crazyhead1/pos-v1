@@ -84,7 +84,6 @@ export const POSEngine: React.FC<ComponentProps> = ({
   const handleIncreaseQuantity = (concernedProduct: any) => {
     if (!concernedProduct) return;
     isLoading = true;
-    console.log({ addedProducts });
     let newAddedProductList = JSON.parse(JSON.stringify(addedProducts));
     if (concernedProduct.quantity >= concernedProduct.unitsInStock) {
       toast.error("No more units stock");
@@ -270,7 +269,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
         toast.success("Order Confirmed");
         invoiceNumber &&
           addLastInvoiceNumber(`${invoiceNumber}`)
-            .then((resp) => console.log({ resp }))
+            .then((resp) => console.log("-"))
             .catch((err) => console.log({ err }));
         setShowLoader(false);
       })

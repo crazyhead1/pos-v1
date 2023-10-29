@@ -6,12 +6,12 @@ import GeneralSettings from "./general";
 const Setting: React.FC<any> = () => {
   return (
     <Tabs defaultActiveKey="general" className="mb-3">
-      <Tab eventKey="general" title="General Settings">
+      <Tab eventKey="general" title="General">
         <GeneralSettings />
       </Tab>
-      <Tab eventKey="color-grid" title="Themes">
+      {/* <Tab eventKey="color-grid" title="Themes">
         <ColorList />
-      </Tab>
+      </Tab> */}
     </Tabs>
   );
 };

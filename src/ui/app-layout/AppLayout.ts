@@ -22,6 +22,13 @@ export const useStylesFromThemeFunction = createUseStyles(
         color: componentColors.PRIMARY.TEXT_COLOR,
         backgroundColor: componentColors.PRIMARY.BACKGROUND,
       },
+      tabsOnAuth: {
+        width: "0px",
+        height: "100%",
+        position: "fixed",
+        left: "0px",
+        top: "0px",
+      },
       tabsWithSidebar: {
         display: "flex",
         flexDirection: "column",
@@ -62,6 +69,9 @@ export const useStylesFromThemeFunction = createUseStyles(
       },
       contentPan: {
         marginLeft: "30px",
+      },
+      contentPanOnAuth: {
+        marginLeft: "0px",
       },
       SidebarArrow: {
         cursor: "pointer",
