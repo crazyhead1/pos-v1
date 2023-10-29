@@ -37,7 +37,6 @@ const GeneralSettings: FC = (props) => {
     <div>
       <Button
         type="button"
-        fullWidth
         variant="contained"
         color="error"
         sx={{ mt: 3, mb: 2 }}

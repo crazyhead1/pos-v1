@@ -10,6 +10,7 @@ import {
 // get products from inventory
 export const getProductsFromInventory = async () => {
   const products = await getInventories();
+  console.log({ products });
   return products.map((product) => ({ ...product.data(), ref: product.ref }));
 };
 

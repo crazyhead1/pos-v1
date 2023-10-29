@@ -18,6 +18,7 @@ import { addUserInLocalstorage } from "../../../utils/utilFunctions";
 import toast from "react-hot-toast";
 import history from "../../common/constants";
 import { useNavigate } from "react-router-dom";
+import bg from "../../../assets/bg-center.png";
 
 const Login: FC = (props) => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const Login: FC = (props) => {
         addUserInLocalstorage(res.user);
         toast.success("Login success");
         history.push("/");
+        setTimeout(() => window.location.reload(), 50);
       })
       .catch((err) => {
         toast.error("Login failed!");
@@ -53,7 +55,7 @@ const Login: FC = (props) => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
+          backgroundImage: `url(${bg})`,
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
@@ -105,10 +107,10 @@ const Login: FC = (props) => {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -118,11 +120,11 @@ const Login: FC = (props) => {
               Login
             </Button>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Link
                   variant="body2"

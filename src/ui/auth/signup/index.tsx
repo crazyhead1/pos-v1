@@ -21,14 +21,13 @@ import {
 } from "../../../utils/utilFunctions";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import bg from "../../../assets/bg-center.png";
 
 const Signup: FC = (props) => {
   const navigate = useNavigate();
 
   const handleSubmit = (events) => {
     events.preventDefault();
-    console.log({ email: events.target.email.value });
-    console.log({ password: events.target.password.value });
     const email = events.target.email.value ?? null;
     const password = events.target.password.value ?? null;
     const confirmPassword = events.target.confirmPassword.value ?? null;
@@ -69,7 +68,7 @@ const Signup: FC = (props) => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
+          backgroundImage: `url(${bg})`,
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
@@ -93,7 +92,7 @@ const Signup: FC = (props) => {
             <LockOutlined />
           </Avatar>
           <Typography component="h1" variant="h5">
-            POS Registration
+            Signup
           </Typography>
           <Box
             component="form"
@@ -131,10 +130,10 @@ const Signup: FC = (props) => {
               id="confirmPassword"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
