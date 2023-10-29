@@ -49,7 +49,7 @@ jobs:
           # You can replace "your-username" and "your-repo-name" with appropriate names.
           tags: mhassaankhokhar/stella
       - name: Deploy
-        uses: ppleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: 146.190.4.216
           username: root
