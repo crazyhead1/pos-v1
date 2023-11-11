@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import React from "react";
-import { Colors } from "../../common/colors";
 import ButtonComponent from "../../common/components/button-component";
 import { ComponentProps, useStylesFromThemeFunction } from "./OrganisationForm";
 
@@ -169,13 +168,14 @@ const OrganisationForm: React.FC<ComponentProps> = ({
 
             <div className={classes.column}>
               <label htmlFor="email">
-                Email
+                Email<span className={classes.colorRed}>*</span>
                 <span className={classes.labelHintWrapper}>Contact Email</span>
               </label>
               <input
                 type="email"
                 className="form-control"
                 id="email"
+                required
                 name="email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
