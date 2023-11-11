@@ -67,13 +67,22 @@ export const addUserInLocalstorage = (user: User) => {
     .getIdToken()
     .then((res) => {
       localStorage.setItem("tkn", res);
+      localStorage.setItem("uid", user.uid);
+      user?.email && localStorage.setItem("email", user.email);
+      user?.photoURL && localStorage.setItem("photoURL", user.photoURL);
     })
     .catch((error) => toast.error("Unable to generate idToken"));
-  localStorage.setItem("uid", user.uid);
-  user.email && localStorage.setItem("email", user.email);
-  user.photoURL && localStorage.setItem("photoURL", user.photoURL);
 };
-
+export const setOrganisationInLocalStorage = (organisationEmail: string) => {
+  console.log({ organisationEmail });
+  if (organisationEmail)
+    localStorage.setItem(
+      "org",
+      `${organisationEmail?.split("@")[0]}_${
+        organisationEmail?.split("@")[1]?.split(".")[0]
+      }`
+    );
+};
 export const removeUserFromLocalstorage = () => {
   localStorage.removeItem("tkn");
   localStorage.removeItem("uid");
@@ -94,6 +103,18 @@ export const isAdmin = (admins) => {
   if (!currentUserEmail && admins.length <= 0) {
     return false;
   } else if (admins.includes(currentUserEmail)) {
+    return true;
+  }
+  return false;
+};
+
+export const isOrganisation = (organisations) => {
+  const currentUserEmail = localStorage.getItem("email") ?? "";
+  if (!currentUserEmail && organisations.length <= 0) {
+    return false;
+  } else if (
+    organisations.find((item) => item?.email?.includes(currentUserEmail))
+  ) {
     return true;
   }
   return false;

@@ -5,22 +5,22 @@ import { useStylesFromThemeFunction, ComponentProps } from "./AppLayout";
 // import "boxicons";
 import Inventory from "../inventory";
 import Users from "../users";
-import Category from "../category";
-import SalesRoute from "../sales-route";
 import Order from "../order";
-import Sales from "../sales";
 import Setting from "../setting";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "../auth/login";
 import ResetPassword from "../auth/reset-password";
 import Signup from "../auth/signup";
 import VerifyEmail from "../auth/verify-email";
-import { adminRoutes, organizationRoutes } from "./routes";
-import { useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../services/cloud";
 import { LOGIN_PATH } from "../common/constants";
-import { isAdmin, isAuthenticated } from "../../utils/utilFunctions";
+import {
+  isAdmin,
+  isAuthenticated,
+  isOrganisation,
+  setOrganisationInLocalStorage,
+} from "../../utils/utilFunctions";
 import Organisation from "../organisation";
 import { getAllAdmins } from "../../parser/admins";
 import { getAllOrganisations } from "../../parser/organisation";
@@ -30,11 +30,27 @@ const AppLayout: React.FC<ComponentProps> = () => {
   const classes = useStylesFromThemeFunction();
   const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(true);
-  const [currentUser, setCurrentUser] = useState({} as any);
+  const [, setCurrentUser] = useState({} as any);
   const [admins, setAdmins] = useState([] as string[]);
+  const [organisations, setOrganisations] = useState([] as any[]);
 
   const isAdminLogin = useMemo(() => isAdmin(admins), [admins]);
-
+  const isOrganisationLogin = useMemo(
+    () => isOrganisation(organisations),
+    [organisations]
+  );
+  useEffect(() => {
+    if (isOrganisationLogin) {
+      const currentUserEmail = localStorage.getItem("email");
+      const foundOrg =
+        currentUserEmail &&
+        organisations?.find((item) => item?.email === currentUserEmail)
+          ? currentUserEmail
+          : null;
+      console.log({ foundOrg });
+      if (foundOrg) setOrganisationInLocalStorage(foundOrg);
+    }
+  }, [isOrganisationLogin]);
   useEffect(() => {
     onAuthStateChanged(auth.getInstance(), (user) => {
       setCurrentUser(user);
@@ -48,6 +64,11 @@ const AppLayout: React.FC<ComponentProps> = () => {
       getAllAdmins()
         .then((res) => {
           setAdmins(res?.[0].admins || []);
+        })
+        .catch((error) => console.log({ error }));
+      getAllOrganisations()
+        .then((res) => {
+          setOrganisations(res || []);
         })
         .catch((error) => console.log({ error }));
       getAllEmployees()
