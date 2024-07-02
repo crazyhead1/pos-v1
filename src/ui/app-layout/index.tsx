@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Col, Collapse, Nav, Row, Tab } from "react-bootstrap";
 import { POSEngine } from "../pos-engine";
 import { useStylesFromThemeFunction, ComponentProps } from "./AppLayout";
-// import "boxicons";
 import Inventory from "../inventory";
 import Users from "../users";
 import Order from "../order";
@@ -25,6 +24,10 @@ import Organisation from "../organisation";
 import { getAllAdmins } from "../../parser/admins";
 import { getAllOrganisations } from "../../parser/organisation";
 import { getAllEmployees } from "../../parser/employee";
+import { Icons } from "../common/icons/Icons";
+import { Box } from "@mui/material";
+
+const windowHeight = window.innerHeight;
 
 const AppLayout: React.FC<ComponentProps> = () => {
   const classes = useStylesFromThemeFunction();
@@ -35,10 +38,12 @@ const AppLayout: React.FC<ComponentProps> = () => {
   const [organisations, setOrganisations] = useState([] as any[]);
 
   const isAdminLogin = useMemo(() => isAdmin(admins), [admins]);
+
   const isOrganisationLogin = useMemo(
     () => isOrganisation(organisations),
     [organisations]
   );
+
   useEffect(() => {
     if (isOrganisationLogin) {
       const currentUserEmail = localStorage.getItem("email");
@@ -51,6 +56,7 @@ const AppLayout: React.FC<ComponentProps> = () => {
       if (foundOrg) setOrganisationInLocalStorage(foundOrg);
     }
   }, [isOrganisationLogin]);
+
   useEffect(() => {
     onAuthStateChanged(auth.getInstance(), (user) => {
       setCurrentUser(user);
@@ -101,7 +107,7 @@ const AppLayout: React.FC<ComponentProps> = () => {
           <Row>
             {isAuthenticated() && (
               <Col sm={3}>
-                <div
+                <Box
                   className={`${
                     showSidebar
                       ? classes.tabsWithSidebar
@@ -109,8 +115,9 @@ const AppLayout: React.FC<ComponentProps> = () => {
                       ? classes.tabs
                       : classes.tabsOnAuth
                   }`}
+                  style={{ height: windowHeight - 50 }}
                 >
-                  <div className={classes.tabsStyle}>
+                  <Box className={classes.tabsStyle}>
                     <Collapse in={showSidebar}>
                       <Nav variant="pills" className="flex-column">
                         <Nav.Item className={classes.link}>
@@ -121,9 +128,9 @@ const AppLayout: React.FC<ComponentProps> = () => {
                               handleTabClick(e, "/organization/pos")
                             }
                           >
-                            <div className={classes.link}>
+                            <Box className={classes.link}>
                               <i className="bx bx-desktop"></i> POS
-                            </div>
+                            </Box>
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
@@ -133,17 +140,17 @@ const AppLayout: React.FC<ComponentProps> = () => {
                               handleTabClick(e, "/organization/inventory")
                             }
                           >
-                            <div className={classes.link}>
+                            <Box className={classes.link}>
                               <i className="bx bxs-package"></i> Inventory
-                            </div>
+                            </Box>
                           </Nav.Link>
                         </Nav.Item>
 
                         {/* <Nav.Item>
                         <Nav.Link eventKey="sales">
-                          <div className={classes.link}>
+                          <Box className={classes.link}>
                             <i className="bx bxs-pie-chart-alt-2"></i> Sales
-                          </div>
+                          </Box>
                         </Nav.Link>
                       </Nav.Item> */}
 
@@ -154,24 +161,24 @@ const AppLayout: React.FC<ComponentProps> = () => {
                               handleTabClick(e, "/organization/orders")
                             }
                           >
-                            <div className={classes.link}>
+                            <Box className={classes.link}>
                               <i className="bx bxs-cart"></i> Orders
-                            </div>
+                            </Box>
                           </Nav.Link>
                         </Nav.Item>
 
                         {/* <Nav.Item>
                         <Nav.Link eventKey="sales-route">
-                          <div className={classes.link}>
+                          <Box className={classes.link}>
                             <i className="bx bxs-map"></i> Sales Route
-                          </div>
+                          </Box>
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
                         <Nav.Link eventKey="categories">
-                          <div className={classes.link}>
+                          <Box className={classes.link}>
                             <i className="bx bxs-category"></i> Categories
-                          </div>
+                          </Box>
                         </Nav.Link>
                       </Nav.Item> */}
 
@@ -182,9 +189,9 @@ const AppLayout: React.FC<ComponentProps> = () => {
                               handleTabClick(e, "/organization/users")
                             }
                           >
-                            <div className={classes.link}>
+                            <Box className={classes.link}>
                               <i className="bx bxs-group"></i> Users
-                            </div>
+                            </Box>
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
@@ -194,9 +201,9 @@ const AppLayout: React.FC<ComponentProps> = () => {
                               handleTabClick(e, "/organization/settings")
                             }
                           >
-                            <div className={classes.link}>
+                            <Box className={classes.link}>
                               <i className="bx bxs-brightness"></i> Settings
-                            </div>
+                            </Box>
                           </Nav.Link>
                         </Nav.Item>
 
@@ -208,16 +215,27 @@ const AppLayout: React.FC<ComponentProps> = () => {
                                 handleTabClick(e, "/admin/organization")
                               }
                             >
-                              <div className={classes.link}>
+                              <Box className={classes.link}>
                                 <i className="bx bxs-brightness"></i>{" "}
                                 Organization
-                              </div>
+                              </Box>
                             </Nav.Link>
                           </Nav.Item>
                         )}
                       </Nav>
                     </Collapse>
-                  </div>
+                  </Box>
+                  <Box
+                    className={classes.profileMenuOption}
+                    onClick={() =>
+                      handleTabClick(null, "/organization/settings")
+                    }
+                  >
+                    <Box className={classes.userIcon}>
+                      <Icons glyph="user" />
+                    </Box>
+                    <Box className={classes.menuLabel}>Profile</Box>
+                  </Box>
                   <h2
                     onClick={() => setShowSidebar(!showSidebar)}
                     className={classes.SidebarArrow}
@@ -228,13 +246,13 @@ const AppLayout: React.FC<ComponentProps> = () => {
                           ? "bx bx-chevron-left"
                           : "bx bx-chevron-right"
                       }`}
-                    ></i>
+                    />
                   </h2>
-                </div>
+                </Box>
               </Col>
             )}
             <Col sm={12}>
-              <div
+              <Box
                 className={`${
                   showSidebar
                     ? classes.contentPanWithSidebar
@@ -297,7 +315,7 @@ const AppLayout: React.FC<ComponentProps> = () => {
                     element={!isAuthenticated() ? <Login /> : <POSEngine />}
                   />
                 </Routes>
-              </div>
+              </Box>
             </Col>
           </Row>
         </Tab.Container>

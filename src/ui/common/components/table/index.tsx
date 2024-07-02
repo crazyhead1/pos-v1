@@ -2,6 +2,7 @@ import LoadingSpinner from "../loading-spinner";
 import React, { FC, ReactElement } from "react";
 import { ThemeInterface } from "../../../../interfaces/theme";
 import { createUseStyles } from "react-jss";
+import { BLACKS } from "../../themes/color-grads";
 
 const useStylesFromThemeFunction = createUseStyles((theme: ThemeInterface) => {
   return {
@@ -9,6 +10,7 @@ const useStylesFromThemeFunction = createUseStyles((theme: ThemeInterface) => {
       borderCollapse: "collapse",
       position: "relative",
       width: "100%",
+      backgroundColor: BLACKS[15],
     },
     klaimTableLoader: {
       alignItems: "center",
@@ -50,6 +52,12 @@ const useStylesFromThemeFunction = createUseStyles((theme: ThemeInterface) => {
     },
     klaimThead: {
       borderBottom: "1px solid #e8e9f2",
+      "& td": {
+        boxShadow: "-1px 0px 0px #e8e9f2 inset",
+        height: 52,
+        MozBoxShadow: "-1px 0px 0px #e8e9f2 inset",
+        WebkitBoxShadow: "-1px 0px 0px #e8e9f2 inset",
+      },
     },
   };
 });

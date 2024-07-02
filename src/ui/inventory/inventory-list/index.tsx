@@ -11,6 +11,7 @@ import {
   editProductFromInventory,
 } from "../../../parser/inventory";
 import InventoryForm from "../Inventory-form";
+import { Box } from "@mui/material";
 
 interface ComponentProps {
   products?: any[];
@@ -89,20 +90,20 @@ const InventoryList: React.FC<ComponentProps> = (props) => {
           <td>{product.category}</td>
           <td>{product.description}</td>
           <td>
-            <div className={classes.equallyDistantRow}>
-              <div
+            <Box className={classes.equallyDistantRow}>
+              <Box
                 className={classes.iconWrapper}
                 onClick={() => handleEditProduct(product)}
               >
                 <EditIcon fill={Colors.gray} />
-              </div>
-              <div
+              </Box>
+              <Box
                 className={classes.iconWrapper}
                 onClick={() => handleRemoveProduct(product)}
               >
                 <RemoveIcon fill={Colors.red} />
-              </div>
-            </div>
+              </Box>
+            </Box>
           </td>
         </tr>
       );
@@ -129,9 +130,9 @@ const InventoryList: React.FC<ComponentProps> = (props) => {
           <Modal.Title>Update {selectedProduct.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className={classes.modalBodyWrapper}>
+          <Box className={classes.modalBodyWrapper}>
             <InventoryForm product={selectedProduct} onSubmit={handleUpdate} />
-          </div>
+          </Box>
         </Modal.Body>
       </Modal>
     </>

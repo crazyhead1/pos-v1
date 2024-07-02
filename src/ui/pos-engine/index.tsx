@@ -72,7 +72,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
   }, [dispatch]);
   const productChange = (product: any) => {
     setSelectedProduct(product);
-    setQuantity(product.unitsInStock | 0);
+    setQuantity(product.unitsInStock && product.unitsInStock>1 ? 1: 0);
   };
 
   const handleRemoveProduct = (product: any) => {
@@ -254,7 +254,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
           (tempSubtotal + tempSubtotal * DEFAULT_TAX_RATE) *
             DEFAULT_DISCOUNT_RATE
       ),
-      customerName: "",
+      customerName: "POS",
       customerId: "",
       employeeName: "",
       employeeId: "",
@@ -263,7 +263,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
 
     addOrderIntoPOS(orderPayload)
       .then((res) => {
-        setQuantity(0);
+        setQuantity(1);
         setSelectedProduct(null);
         dispatch(fetchProductList());
         toast.success("Order Confirmed");
@@ -279,7 +279,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
       });
   };
   const handleClearAll = () => {
-    setQuantity(0);
+    setQuantity(1);
     setSelectedProduct(null);
     setAddedProducts([]);
   };
@@ -301,7 +301,13 @@ export const POSEngine: React.FC<ComponentProps> = ({
               variant="primary"
               value={`${quantity}`}
               placeholder="0"
-              onChange={setQuantity}
+              onChange={(value)=>{
+                if(value<1){
+                  toast.error('Quantity cannot be less than 1');
+                  return;
+                }
+                setQuantity(value)
+              }}
             />
             <ButtonComponent
               variant={btnType.PRIMARY}

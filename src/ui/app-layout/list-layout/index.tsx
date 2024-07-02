@@ -12,6 +12,7 @@ import {
 } from "../../common/components/typography";
 import { btnType } from "../../common/components/button-component/ButtonComponent.types";
 import { useStylesFromThemeFunction } from "./ListLayout";
+import { Box } from "@mui/material";
 
 interface ComponentProps {
   title?: string | null;
@@ -37,7 +38,7 @@ const ListLayout: React.FC<ComponentProps> = ({
     }
   }, [closeDrawer]);
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <Drawer
         onClose={toggleDrawerView}
         open={showDrawer}
@@ -46,8 +47,8 @@ const ListLayout: React.FC<ComponentProps> = ({
       >
         {drawerComponent ?? <></>}
       </Drawer>
-      <div className={classes.visibleConatiner}>
-        <div className={classes.headerWrapper}>
+      <Box className={classes.visibleConatiner}>
+        <Box className={classes.headerWrapper}>
           <Text
             className={classes.title}
             size={textLevel.XL}
@@ -64,16 +65,16 @@ const ListLayout: React.FC<ComponentProps> = ({
               variant={btnType.PRIMARY}
               size={btnSize.L}
             >
-              <Text>Add {title ?? "item"}</Text>
+              <Text className={classes.addBtn}>Add {title ?? "item"}</Text>
             </ButtonComponent>
           )}
-        </div>
+        </Box>
 
-        <div className={classes.listContainer}>
+        <Box className={classes.listContainer}>
           {listComponent ? listComponent : <></>}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
