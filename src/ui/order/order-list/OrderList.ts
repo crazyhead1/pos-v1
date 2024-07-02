@@ -37,7 +37,7 @@ export const useStylesFromThemeFunction = createUseStyles(
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        width: "fit-content",
+        width: "100%",
       },
     };
   }

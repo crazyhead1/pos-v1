@@ -98,6 +98,7 @@ export const CYANS = {
 // Blacks
 export const BLACKS = {
   10: "#ffffff",
+  15: "#fafafa",
   20: "#d9d9d9",
   30: "#bfbfbf",
   40: "#a6a6a6",

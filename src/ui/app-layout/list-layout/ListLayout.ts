@@ -1,10 +1,6 @@
 import { createUseStyles } from "react-jss";
-import {
-  BLACKS,
-  SKY_BLUES,
-  getComponentColors,
-} from "../../common/themes/color-grads";
-const colors = getComponentColors();
+import { BLACKS, SKY_BLUES } from "../../common/themes/color-grads";
+
 export const useStylesFromThemeFunction = createUseStyles({
   root: {
     display: "flex",
@@ -17,6 +13,14 @@ export const useStylesFromThemeFunction = createUseStyles({
     fontWeight: "bold",
     lineHeight: "32px",
     fontFamily: "sans-serif",
+  },
+  addBtn: {
+    fontSize: "22px",
+    fontWeight: "bold",
+    lineHeight: "24px",
+    fontFamily: "sans-serif",
+    color: "white",
+    border: "none",
   },
   headerWrapper: {
     display: "flex",

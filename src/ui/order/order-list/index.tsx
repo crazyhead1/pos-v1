@@ -1,13 +1,20 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Table from "../../common/components/table";
 import { getOrders } from "../../../data-management/cloud/firebase/firestore/order";
+import ListLayout from "../../app-layout/list-layout";
+import { Modal } from "react-bootstrap";
+import { useStylesFromThemeFunction } from "./OrderList";
 
 interface ComponentProps {
   orders?: any[];
 }
 
 const OrderList: React.FC<ComponentProps> = (props) => {
-  const [tableHeadings] = React.useState([
+  const classes = useStylesFromThemeFunction();
+  const [showProductModal, setShowProductModal] = useState({} as any);
+  const [productsInModal, setProductsInModal] = useState([]);
+  const [tableHeadings] = useState([
+    "Sr#",
     "Customer",
     "Products",
     "Total",
@@ -18,7 +25,7 @@ const OrderList: React.FC<ComponentProps> = (props) => {
     props?.orders as any[] | [] as any[]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     getOrders().then((res) => {
       console.log({ res });
       seOrders(res);
@@ -27,12 +34,14 @@ const OrderList: React.FC<ComponentProps> = (props) => {
   }, []);
 
   const onViewOrder = (order: any) => {
-    console.log({ order });
+    console.log({order})
+    setShowProductModal(order);
   };
   const renderTableData = useMemo(() => {
-    return orders?.map((order) => {
+    return orders?.map((order, index) => {
       return (
         <tr key={order.id} onDoubleClick={() => onViewOrder(order)}>
+          <td>{index+1}</td>
           <td>{order.customerName}</td>
           <td>{order.products?.length}</td>
           <td>{order.total}</td>
@@ -41,6 +50,28 @@ const OrderList: React.FC<ComponentProps> = (props) => {
       );
     });
   }, [orders]);
+
+  useEffect(() => {
+    if (showProductModal?.products) {
+      setProductsInModal(
+        showProductModal?.products?.map((product,index) => {
+          const { name, unitPrice, quantity, category } = product;
+          const total = unitPrice * quantity;
+          return (
+            <tr key={name}>
+              <td>{index+1}</td>
+              <td>{name ?? '-'}</td>
+              <td>{quantity ?? '-'}</td>
+              <td>{unitPrice ?? '-'}</td>
+              <td>{total ?? '-'}</td>
+              <td>{category ? category: '-'}</td>
+            </tr>
+          );
+        })
+      );
+    }
+  }, [showProductModal]);
+
   return (
     <>
       <Table
@@ -48,16 +79,24 @@ const OrderList: React.FC<ComponentProps> = (props) => {
         renderBody={renderTableData}
         loading={isLoading}
       />
-      {/* <Modal className={classes.modalWrapper} show={showProductUpdateModal} onHide={()=>setShowProductUpdateModal(false)}>
+      <Modal
+        className={classes.modalWrapper}
+        show={showProductModal?.products}
+        onHide={() => setShowProductModal(null)}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Update {selectedProduct.name}</Modal.Title>
+          <Modal.Title>Products</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className={classes.modalBodyWrapper}>
-            <InventoryForm product={selectedProduct} onSubmit={handleUpdate}/>
+            <Table
+              tableHeadings={["Sr#", "Product", "Quantity", "Price", "Total", "Category"]}
+              renderBody={productsInModal}
+              loading={isLoading}
+            />
           </div>
         </Modal.Body>
-      </Modal> */}
+      </Modal>
     </>
   );
 };

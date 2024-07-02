@@ -81,6 +81,20 @@ export const useStylesFromThemeFunction = createUseStyles(
         textDecoration: "none",
         cursor: "pointer",
       },
+      userIcon: {
+        width: 30,
+        height: 30,
+      },
+      menuLabel: {
+        color: componentColors.PRIMARY.OUTLINE_TEXT_COLOR,
+      },
+      profileMenuOption: {
+        display: "flex",
+        flexDirection: "row",
+        gap: 8,
+        justifyContent: "center",
+        alignItems: "center",
+      },
     };
   }
 );
