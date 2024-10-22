@@ -72,7 +72,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
   }, [dispatch]);
   const productChange = (product: any) => {
     setSelectedProduct(product);
-    setQuantity(product.unitsInStock && product.unitsInStock>1 ? 1: 0);
+    setQuantity(product.unitsInStock && product.unitsInStock > 1 ? 1 : 0);
   };
 
   const handleRemoveProduct = (product: any) => {
@@ -215,7 +215,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
       //remove this line after confirm order and print
       throw new Error("Error");
     } catch (error) {
-      const logResult = await addLog({
+      await addLog({
         message: error.message,
         path: `${__filename}-handlePrint`,
       });
@@ -301,12 +301,12 @@ export const POSEngine: React.FC<ComponentProps> = ({
               variant="primary"
               value={`${quantity}`}
               placeholder="0"
-              onChange={(value)=>{
-                if(value<1){
-                  toast.error('Quantity cannot be less than 1');
+              onChange={(value) => {
+                if (value < 1) {
+                  toast.error("Quantity cannot be less than 1");
                   return;
                 }
-                setQuantity(value)
+                setQuantity(value);
               }}
             />
             <ButtonComponent
