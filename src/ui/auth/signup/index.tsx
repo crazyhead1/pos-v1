@@ -3,16 +3,14 @@ import {
   Avatar,
   Box,
   Button,
-  Checkbox,
   CssBaseline,
-  FormControlLabel,
   Grid,
   Link,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
-import { LockOutlined } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import { register } from "../../../data-management/cloud/firebase/auth";
 import {
   addUserInLocalstorage,
@@ -21,7 +19,7 @@ import {
 } from "../../../utils/utilFunctions";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import bg from "../../../assets/bg-center.png";
+import bg from "../../../assets/bg.jpg";
 
 const Signup: FC = (props) => {
   const navigate = useNavigate();
@@ -60,25 +58,36 @@ const Signup: FC = (props) => {
       });
   };
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
+    <Grid
+      container
+      component="main"
+      sx={{
+        height: "100vh",
+        backgroundImage: `url(${bg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundColor: (t) =>
+          t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} />
       <Grid
         item
-        xs={false}
-        sm={4}
-        md={7}
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
         sx={{
-          backgroundImage: `url(${bg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-      />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      >
         <Box
           sx={{
             my: 8,
@@ -88,17 +97,14 @@ const Signup: FC = (props) => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlined />
-          </Avatar>
           <Typography component="h1" variant="h5">
-            Signup
+            <Add /> Signup
           </Typography>
           <Box
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
+            sx={{ mt: 1, mx: 12.5 }}
           >
             <TextField
               margin="normal"
@@ -142,9 +148,11 @@ const Signup: FC = (props) => {
             >
               Register
             </Button>
+
             <Grid container>
               <Grid item>
                 <Link
+                  style={{ textDecoration: "none", cursor: "pointer" }}
                   variant="body2"
                   onClick={(e) => {
                     e.preventDefault();

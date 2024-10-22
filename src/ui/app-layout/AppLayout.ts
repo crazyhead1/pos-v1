@@ -41,7 +41,6 @@ export const useStylesFromThemeFunction = createUseStyles(
         top: "0px",
         backgroundColor: componentColors.DISABLED.TEXT_COLOR,
         "&:hover": {
-          cursor: "pointer",
           color: componentColors.DISABLED.BACKGROUND,
         },
       },
@@ -58,7 +57,6 @@ export const useStylesFromThemeFunction = createUseStyles(
         fontSize: "22px",
         fontFamily: "sans-serif",
         "&:hover": {
-          cursor: "pointer",
           color: componentColors.DISABLED.BACKGROUND,
         },
       },
@@ -74,11 +72,10 @@ export const useStylesFromThemeFunction = createUseStyles(
         marginLeft: "0px",
       },
       SidebarArrow: {
-        cursor: "pointer",
         position: "absolute",
       },
       link: {
-        textDecoration: "none",
+        // textDecoration: "none",
         cursor: "pointer",
       },
       userIcon: {
@@ -94,6 +91,24 @@ export const useStylesFromThemeFunction = createUseStyles(
         gap: 8,
         justifyContent: "center",
         alignItems: "center",
+      },
+      profileTabWrapper: {
+        display: "flex",
+        flexDirection: "row",
+        gap: 8,
+        justifyContent: "start",
+        alignItems: "center",
+        color: componentColors.PRIMARY.OUTLINE_TEXT_COLOR,
+        fontSize: 20,
+        fontWeight: 450,
+        cursor: "pointer",
+        paddingLeft: 5,
+      },
+      tabsContainer: {
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        gap: 650,
       },
     };
   }

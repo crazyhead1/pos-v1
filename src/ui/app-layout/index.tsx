@@ -123,6 +123,9 @@ const AppLayout: React.FC<ComponentProps> = () => {
                         <Nav.Item className={classes.link}>
                           <Nav.Link
                             eventKey="pos"
+                            active={
+                              window.location.pathname === "/organization/pos"
+                            }
                             className={classes.link}
                             onClick={(e) =>
                               handleTabClick(e, "/organization/pos")
@@ -136,6 +139,10 @@ const AppLayout: React.FC<ComponentProps> = () => {
                         <Nav.Item>
                           <Nav.Link
                             eventKey="inventory"
+                            active={
+                              window.location.pathname ===
+                              "/organization/inventory"
+                            }
                             onClick={(e) =>
                               handleTabClick(e, "/organization/inventory")
                             }
@@ -145,18 +152,13 @@ const AppLayout: React.FC<ComponentProps> = () => {
                             </Box>
                           </Nav.Link>
                         </Nav.Item>
-
-                        {/* <Nav.Item>
-                        <Nav.Link eventKey="sales">
-                          <Box className={classes.link}>
-                            <i className="bx bxs-pie-chart-alt-2"></i> Sales
-                          </Box>
-                        </Nav.Link>
-                      </Nav.Item> */}
-
                         <Nav.Item>
                           <Nav.Link
                             eventKey="orders"
+                            active={
+                              window.location.pathname ===
+                              "/organization/orders"
+                            }
                             onClick={(e) =>
                               handleTabClick(e, "/organization/orders")
                             }
@@ -166,25 +168,12 @@ const AppLayout: React.FC<ComponentProps> = () => {
                             </Box>
                           </Nav.Link>
                         </Nav.Item>
-
-                        {/* <Nav.Item>
-                        <Nav.Link eventKey="sales-route">
-                          <Box className={classes.link}>
-                            <i className="bx bxs-map"></i> Sales Route
-                          </Box>
-                        </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="categories">
-                          <Box className={classes.link}>
-                            <i className="bx bxs-category"></i> Categories
-                          </Box>
-                        </Nav.Link>
-                      </Nav.Item> */}
-
                         <Nav.Item>
                           <Nav.Link
                             eventKey="users"
+                            active={
+                              window.location.pathname === "/organization/users"
+                            }
                             onClick={(e) =>
                               handleTabClick(e, "/organization/users")
                             }
@@ -194,23 +183,15 @@ const AppLayout: React.FC<ComponentProps> = () => {
                             </Box>
                           </Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
-                          <Nav.Link
-                            eventKey="settings"
-                            onClick={(e) =>
-                              handleTabClick(e, "/organization/settings")
-                            }
-                          >
-                            <Box className={classes.link}>
-                              <i className="bx bxs-brightness"></i> Settings
-                            </Box>
-                          </Nav.Link>
-                        </Nav.Item>
 
                         {isAdminLogin && (
                           <Nav.Item>
                             <Nav.Link
                               eventKey="organization"
+                              active={
+                                window.location.pathname ===
+                                "/admin/organization"
+                              }
                               onClick={(e) =>
                                 handleTabClick(e, "/admin/organization")
                               }
@@ -222,19 +203,24 @@ const AppLayout: React.FC<ComponentProps> = () => {
                             </Nav.Link>
                           </Nav.Item>
                         )}
+                        <Nav.Item>
+                          <Nav.Link
+                            eventKey="settings"
+                            active={
+                              window.location.pathname ===
+                              "/organization/settings"
+                            }
+                            onClick={(e) =>
+                              handleTabClick(e, "/organization/settings")
+                            }
+                          >
+                            <Box className={classes.link}>
+                              <i className="bx bxs-brightness"></i> Settings
+                            </Box>
+                          </Nav.Link>
+                        </Nav.Item>
                       </Nav>
                     </Collapse>
-                  </Box>
-                  <Box
-                    className={classes.profileMenuOption}
-                    onClick={() =>
-                      handleTabClick(null, "/organization/settings")
-                    }
-                  >
-                    <Box className={classes.userIcon}>
-                      <Icons glyph="user" />
-                    </Box>
-                    <Box className={classes.menuLabel}>Profile</Box>
                   </Box>
                   <h2
                     onClick={() => setShowSidebar(!showSidebar)}
@@ -295,21 +281,6 @@ const AppLayout: React.FC<ComponentProps> = () => {
                       element={<Organisation />}
                     />
                   )}
-                  {/* {isAuthenticated() && (
-                    <>
-
-                      {/* {(isAdmin() ? adminRoutes : organizationRoutes).map( */}
-                  {/* {organizationRoutes.map(
-                        ({ path, component: Component }) => (
-                          <Route
-                            path={path}
-                            element={<Component />}
-                            key={path}
-                          />
-                        )
-                      )} }
-                    </>
-                  )} */}
                   <Route
                     path="/"
                     element={!isAuthenticated() ? <Login /> : <POSEngine />}

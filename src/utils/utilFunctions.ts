@@ -1,6 +1,5 @@
 import { User } from "firebase/auth";
 import toast from "react-hot-toast";
-import history from "../ui/common/constants";
 
 export const generateNextInvoiceNumber = (initialNumber = "AAA0000000") => {
   if (!/^[A-Z]{3}\d{7}$/.test(initialNumber)) {
@@ -62,7 +61,6 @@ export const isStrongPassword = (password: string): boolean => {
 };
 
 export const addUserInLocalstorage = (user: User) => {
-  console.log({ user });
   user
     .getIdToken()
     .then((res) => {
