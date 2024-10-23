@@ -25,10 +25,6 @@ const Login: FC = (props) => {
   const [selectedTab, setSelectedTab] = useState(USER_TYPES.EMPLOYEE);
   const handleSubmit = (events) => {
     events.preventDefault();
-    console.log("logged in as - ", selectedTab, {
-      email: events.target.email.value,
-      password: events.target.password.value,
-    });
     const email = events.target.email.value ?? null;
     const password = events.target.password.value ?? null;
     if (!email) {
@@ -46,7 +42,6 @@ const Login: FC = (props) => {
         setTimeout(() => window.location.reload(), 50);
       })
       .catch((err) => {
-        console.log({ err });
         toast.error("Login failed!");
       });
   };

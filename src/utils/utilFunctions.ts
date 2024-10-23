@@ -1,5 +1,11 @@
 import { User } from "firebase/auth";
 import toast from "react-hot-toast";
+import emailJs from "@emailjs/browser";
+import {
+  PUBLIC_KEY,
+  SERVICE_ID_GMAIL,
+  TEMPLATE_ID_INVENTORY_RUNNING_OUT,
+} from "../constants/emailjs";
 
 export const generateNextInvoiceNumber = (initialNumber = "AAA0000000") => {
   if (!/^[A-Z]{3}\d{7}$/.test(initialNumber)) {
@@ -72,7 +78,6 @@ export const addUserInLocalstorage = (user: User) => {
     .catch((error) => toast.error("Unable to generate idToken"));
 };
 export const setOrganisationInLocalStorage = (organisationEmail: string) => {
-  console.log({ organisationEmail });
   if (organisationEmail)
     localStorage.setItem(
       "org",
@@ -116,4 +121,31 @@ export const isOrganisation = (organisations) => {
     return true;
   }
   return false;
+};
+
+export const sendEmail = (toEmail, message) => {
+  if (!toEmail || !message) {
+    console.error("Invalid email or message");
+    return;
+  }
+  const templateParams = {
+    user_email: toEmail,
+    message: message,
+  };
+
+  emailJs
+    .send(
+      SERVICE_ID_GMAIL,
+      TEMPLATE_ID_INVENTORY_RUNNING_OUT,
+      templateParams,
+      PUBLIC_KEY
+    )
+    .then(
+      (result) => {
+        console.log("Email sent:", result.text);
+      },
+      (error) => {
+        console.log("Failed to send email:", error.text);
+      }
+    );
 };

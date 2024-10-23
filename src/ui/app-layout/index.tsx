@@ -52,7 +52,6 @@ const AppLayout: React.FC<ComponentProps> = () => {
         organisations?.find((item) => item?.email === currentUserEmail)
           ? currentUserEmail
           : null;
-      console.log({ foundOrg });
       if (foundOrg) setOrganisationInLocalStorage(foundOrg);
     }
   }, [isOrganisationLogin]);
@@ -82,7 +81,6 @@ const AppLayout: React.FC<ComponentProps> = () => {
           const foundEmployee = res?.find(
             (item) => item.email === localStorage.getItem("email")
           );
-          console.log({ res, foundEmployee });
           if (foundEmployee) {
             localStorage.setItem("org", foundEmployee.organisation ?? "admin");
           }

@@ -23,8 +23,12 @@ import {
   addLastInvoiceNumber,
   getLastInvoiceNumber,
 } from "../../data-management/cloud/firebase/database/invoice/invoice.operations";
-import { generateNextInvoiceNumber } from "../../utils/utilFunctions";
+import {
+  generateNextInvoiceNumber,
+  sendEmail,
+} from "../../utils/utilFunctions";
 import dayjs from "dayjs";
+import { getInvnetoryRunningOutEmailTemplate } from "../../constants/emailjs";
 
 export const POSEngine: React.FC<ComponentProps> = ({
   label,
@@ -226,6 +230,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
   const handleConfirm = async () => {
     setShowLoader(true);
     let tempSubtotal = 0;
+    let goingOutOfStockProducts = [];
     const productsInOrder = addedProducts.map((product) => {
       const { name, unitPrice, quantity } = product;
       const total = unitPrice * quantity;
@@ -238,6 +243,9 @@ export const POSEngine: React.FC<ComponentProps> = ({
         ...product,
       };
     });
+    goingOutOfStockProducts = productsInOrder.filter(
+      (product) => product.unitsInStock <= 5
+    );
     // confirm order here
     const orderPayload = {
       products: productsInOrder,
@@ -263,6 +271,29 @@ export const POSEngine: React.FC<ComponentProps> = ({
 
     addOrderIntoPOS(orderPayload)
       .then((res) => {
+        // send email here
+        const email = localStorage.getItem("email");
+        if (email) {
+          sendEmail(
+            "notasadsarwar@gmail.com",
+            getInvnetoryRunningOutEmailTemplate({
+              invoice: {
+                invoiceNumber,
+                customer: orderPayload.customerName,
+                date: orderPayload.dateTime,
+              },
+              products: productsInOrder,
+              total: orderPayload.total,
+              tax: orderPayload.tax,
+              company: {
+                email,
+                phone: "---",
+                address: "Pakistan",
+              },
+            })
+          );
+        }
+
         setQuantity(1);
         setSelectedProduct(null);
         dispatch(fetchProductList());
@@ -271,7 +302,24 @@ export const POSEngine: React.FC<ComponentProps> = ({
           addLastInvoiceNumber(`${invoiceNumber}`)
             .then((resp) => console.log("-"))
             .catch((err) => console.log({ err }));
+
+        // if (goingOutOfStockProducts.length > 0) {
+        //   toast.error("Some products are going out of stock");
+        //   const email = localStorage.getItem("email");
+        //   if (email) {
+        //     sendEmail(
+        //       "notasadsarwar@gmail.com",
+        //       `Products going out of stock: ${goingOutOfStockProducts
+        //         .map(
+        //           (product) =>
+        //             `${product.name} - ${product.unitsInStock} units left`
+        //         )
+        //         .join(", ")}`
+        //     );
+        //   }
+        // }
         setShowLoader(false);
+        handleClearAll();
       })
       .catch((error) => {
         setShowLoader(false);

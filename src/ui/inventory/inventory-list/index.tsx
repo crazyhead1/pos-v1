@@ -43,7 +43,6 @@ const InventoryList: React.FC<ComponentProps> = (props) => {
   // }
   React.useEffect(() => {
     getProductsFromInventory().then((res) => {
-      console.log({ res });
       setProducts(res);
       // renderTableData();
     });

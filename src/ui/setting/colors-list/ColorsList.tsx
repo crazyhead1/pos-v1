@@ -14,10 +14,6 @@ export const ColorList: React.FC<ComponentProps> = () => {
   const handleMouseOut = (index) => {
     setIsHovering(index);
   };
-  // const handleThemeSelect = (colorGridKey: string) => {
-  //   console.log(colorGridKey, " are selected");
-  // };
-
   return (
     <div className={classes.grid}>
       {Object.keys(COLOR_GRIDS).map((colorGridKey) => {
