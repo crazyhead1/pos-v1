@@ -24,7 +24,6 @@ const ProfileSettings: FC = (props) => {
 
     signOff()
       ?.then((res) => {
-        console.log({ res }, "logout");
         removeUserFromLocalstorage();
         toast.success("Sign out successful");
         history.push(LOGIN_PATH);

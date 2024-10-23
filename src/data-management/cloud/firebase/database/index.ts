@@ -120,12 +120,9 @@ export const removeWithUserID = async (
 
 export const getWithPath = async (path: string): Promise<any> => {
   try {
-    console.log("in db", path);
     const snapShot = await get(ref(firebaseDatabase.getInstance(), path));
-    console.log({ snapShot });
     return snapShot?.toJSON();
   } catch (error: any) {
-    console.log({ error });
     return {
       message: error.message,
       stack: error.stack,

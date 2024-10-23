@@ -56,14 +56,18 @@ export const Invoice: React.FC<ComponentProps> = ({
         </tr>
       );
     });
-    setSubtotal(parseFloat((tempSubtotal).toFixed(2)));
+    setSubtotal(parseFloat(tempSubtotal.toFixed(2)));
     setTax(parseFloat((tempSubtotal * DEFAULT_TAX_RATE).toFixed(2)));
     setTotal(parseFloat((tempSubtotal + tax).toFixed(2)));
-    setDiscount(parseFloat(((tempSubtotal + tax) * DEFAULT_DISCOUNT_RATE).toFixed(2)));
+    setDiscount(
+      parseFloat(((tempSubtotal + tax) * DEFAULT_DISCOUNT_RATE).toFixed(2))
+    );
     setAmountDue(
-      parseFloat((Math.round(
-        tempSubtotal + tax - (tempSubtotal + tax) * DEFAULT_DISCOUNT_RATE
-      )).toFixed(2))
+      parseFloat(
+        Math.round(
+          tempSubtotal + tax - (tempSubtotal + tax) * DEFAULT_DISCOUNT_RATE
+        ).toFixed(2)
+      )
     );
     return renderedProducts;
   }, [products]);
@@ -72,7 +76,6 @@ export const Invoice: React.FC<ComponentProps> = ({
     setAmountPaid(amount);
     setAmountReturned(Math.round(amount - amountDue));
   };
-  console.log({ amountPaid, isLoading, isPrintEnable });
   return (
     <div className={classes.totalBillContainer}>
       <h1 className={classes.title}>
@@ -155,12 +158,15 @@ export const Invoice: React.FC<ComponentProps> = ({
         >
           Confirm
         </ButtonComponent>
-        <ButtonComponent onClick={()=>{
-          setAmountPaid(0);
-          setAmountReturned(0);
-          setAmountDue(0)
-          handleCancel && handleCancel()
-        }} variant={btnType.SECONDARY}>
+        <ButtonComponent
+          onClick={() => {
+            setAmountPaid(0);
+            setAmountReturned(0);
+            setAmountDue(0);
+            handleCancel && handleCancel();
+          }}
+          variant={btnType.SECONDARY}
+        >
           Clear
         </ButtonComponent>
       </div>

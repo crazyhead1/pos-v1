@@ -39,7 +39,6 @@ export const addOrder = async (data: any) => {
       })
     );
     docRefsWithQuantities.forEach((docRefWithQuantity) => {
-      console.log({ docRefWithQuantity });
       transaction.update(docRefWithQuantity.ref, {
         unitsInStock: docRefWithQuantity.unitsInStock,
       });

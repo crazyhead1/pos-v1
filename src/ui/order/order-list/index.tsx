@@ -27,21 +27,19 @@ const OrderList: React.FC<ComponentProps> = (props) => {
 
   useEffect(() => {
     getOrders().then((res) => {
-      console.log({ res });
       seOrders(res);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onViewOrder = (order: any) => {
-    console.log({order})
     setShowProductModal(order);
   };
   const renderTableData = useMemo(() => {
     return orders?.map((order, index) => {
       return (
         <tr key={order.id} onDoubleClick={() => onViewOrder(order)}>
-          <td>{index+1}</td>
+          <td>{index + 1}</td>
           <td>{order.customerName}</td>
           <td>{order.products?.length}</td>
           <td>{order.total}</td>
@@ -54,17 +52,17 @@ const OrderList: React.FC<ComponentProps> = (props) => {
   useEffect(() => {
     if (showProductModal?.products) {
       setProductsInModal(
-        showProductModal?.products?.map((product,index) => {
+        showProductModal?.products?.map((product, index) => {
           const { name, unitPrice, quantity, category } = product;
           const total = unitPrice * quantity;
           return (
             <tr key={name}>
-              <td>{index+1}</td>
-              <td>{name ?? '-'}</td>
-              <td>{quantity ?? '-'}</td>
-              <td>{unitPrice ?? '-'}</td>
-              <td>{total ?? '-'}</td>
-              <td>{category ? category: '-'}</td>
+              <td>{index + 1}</td>
+              <td>{name ?? "-"}</td>
+              <td>{quantity ?? "-"}</td>
+              <td>{unitPrice ?? "-"}</td>
+              <td>{total ?? "-"}</td>
+              <td>{category ? category : "-"}</td>
             </tr>
           );
         })
@@ -90,7 +88,14 @@ const OrderList: React.FC<ComponentProps> = (props) => {
         <Modal.Body>
           <div className={classes.modalBodyWrapper}>
             <Table
-              tableHeadings={["Sr#", "Product", "Quantity", "Price", "Total", "Category"]}
+              tableHeadings={[
+                "Sr#",
+                "Product",
+                "Quantity",
+                "Price",
+                "Total",
+                "Category",
+              ]}
               renderBody={productsInModal}
               loading={isLoading}
             />
