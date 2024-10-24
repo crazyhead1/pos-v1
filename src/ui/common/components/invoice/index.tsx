@@ -8,6 +8,8 @@ import Table from "../table";
 import ValueComponent from "../value-component";
 import { ComponentProps, useStylesFromThemeFunction } from "./Invoice";
 import { btnType } from "../button-component/ButtonComponent.types";
+import dayjs from "dayjs";
+import clsx from "clsx";
 
 export const Invoice: React.FC<ComponentProps> = ({
   label,
@@ -78,9 +80,12 @@ export const Invoice: React.FC<ComponentProps> = ({
   };
   return (
     <div className={classes.totalBillContainer}>
-      <h1 className={classes.title}>
-        Invoice <span className={classes.title2}>{invoiceNumber}</span>
+      <h1 className={clsx(classes.title, classes.p5, classes.spaceBetween)}>
+        <div>Invoice</div> <div className={classes.title2}>{invoiceNumber}</div>
       </h1>
+      <div className={clsx(classes.pl5)}>
+        {dayjs(date).format("DD MMMM, YYYY")}
+      </div>
       <div className={`${classes.equallyDistantColumn}`}>
         <AmountValueComponent
           label="Amount Due"
@@ -88,13 +93,7 @@ export const Invoice: React.FC<ComponentProps> = ({
           direction="column"
         />
       </div>
-      <div className={classes.padding8}>
-        <ValueComponent
-          label="Date"
-          value={date.toLocaleDateString()}
-          direction="column"
-        />
-      </div>
+
       <div className={classes.productsList}>
         {products.length <= 0 ? (
           <div className={classes.noData}>
@@ -114,8 +113,8 @@ export const Invoice: React.FC<ComponentProps> = ({
           name="paidAmount"
           type="number"
           variant="primary"
-          value={`${amountPaid}`}
-          placeholder="0"
+          value={amountPaid.toString()}
+          placeholder="Enter paid amount"
           onChange={paidAmountChangeHandler}
         />
       </div>
@@ -150,6 +149,8 @@ export const Invoice: React.FC<ComponentProps> = ({
           onClick={() => {
             setIsPrintEnable(true);
             handleConfirm();
+            setAmountPaid(0);
+            setAmountReturned(0);
           }}
           isLoading={isLoading}
           //   size={btnSize.M}

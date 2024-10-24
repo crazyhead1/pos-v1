@@ -43,7 +43,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
   const [showLoader, setShowLoader] = useState(false || isLoading || loading);
 
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = React.useState(1 as number);
+  const [quantity, setQuantity] = React.useState(0);
   const [selectedProduct, setSelectedProduct] = React.useState(null as any);
   const [addedProducts, setAddedProducts] = React.useState([] as any[]);
   const [invoiceNumber, setInvoiceNumber] = React.useState("");
@@ -65,15 +65,18 @@ export const POSEngine: React.FC<ComponentProps> = ({
       //       value: product,
       //     }))
       //   :
-      productList?.map((product) => ({
-        label: `${product.id} - ${product.name}`,
-        value: product,
-      })),
+      productList
+        ?.map((product) => ({
+          label: `${product.id} - ${product.name}`,
+          value: product,
+        }))
+        ?.filter((product) => parseInt(product.value.unitsInStock, 10) > 0),
     [productList]
   );
   useEffect(() => {
     dispatch(fetchProductList());
   }, [dispatch]);
+
   const productChange = (product: any) => {
     setSelectedProduct(product);
     setQuantity(product.unitsInStock && product.unitsInStock > 1 ? 1 : 0);
@@ -174,8 +177,22 @@ export const POSEngine: React.FC<ComponentProps> = ({
   }, [addedProducts]);
 
   const handleProductAdd = () => {
-    if (!selectedProduct) return;
+    if (!quantity || quantity <= 0) {
+      toast.error("Quantity should be greater than 0");
+      return;
+    }
+    if (!selectedProduct) {
+      toast.error("Please select a product");
+      return;
+    }
 
+    if (
+      selectedProduct.unitsInStock <= 0 ||
+      selectedProduct.unitsInStock < quantity
+    ) {
+      toast.error("No more units in stock");
+      return;
+    }
     let addNewProduct = true;
     isLoading = true;
     addedProducts.forEach((product) => {
@@ -273,26 +290,26 @@ export const POSEngine: React.FC<ComponentProps> = ({
       .then((res) => {
         // send email here
         const email = localStorage.getItem("email");
-        if (email) {
-          sendEmail(
-            "notasadsarwar@gmail.com",
-            getInvnetoryRunningOutEmailTemplate({
-              invoice: {
-                invoiceNumber,
-                customer: orderPayload.customerName,
-                date: orderPayload.dateTime,
-              },
-              products: productsInOrder,
-              total: orderPayload.total,
-              tax: orderPayload.tax,
-              company: {
-                email,
-                phone: "---",
-                address: "Pakistan",
-              },
-            })
-          );
-        }
+        // if (email) {
+        //   sendEmail(
+        //     "notasadsarwar@gmail.com",
+        //     getInvnetoryRunningOutEmailTemplate({
+        //       invoice: {
+        //         invoiceNumber,
+        //         customer: orderPayload.customerName,
+        //         date: orderPayload.dateTime,
+        //       },
+        //       products: productsInOrder,
+        //       total: orderPayload.total,
+        //       tax: orderPayload.tax,
+        //       company: {
+        //         email,
+        //         phone: "---",
+        //         address: "Pakistan",
+        //       },
+        //     })
+        //   );
+        // }
 
         setQuantity(1);
         setSelectedProduct(null);
@@ -337,6 +354,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
         <div className={classes.productSearchContainer}>
           <DropdownSearch
             label="Product"
+            value={selectedProduct}
             options={productOptions ?? []}
             placeholder="Search Product"
             onChange={productChange}
@@ -345,13 +363,13 @@ export const POSEngine: React.FC<ComponentProps> = ({
             <InputComponent
               label="Quantity"
               name="quantity"
-              type="number"
               variant="primary"
-              value={`${quantity}`}
-              placeholder="0"
+              value={quantity.toString()}
+              placeholder="Enter quantity"
               onChange={(value) => {
-                if (value < 1) {
-                  toast.error("Quantity cannot be less than 1");
+                const containsNonDigitCharacters = `${value}`.match(/\D/);
+                if (containsNonDigitCharacters) {
+                  toast.error("Quantity should only contain digits");
                   return;
                 }
                 setQuantity(value);

@@ -1,0 +1,14 @@
+I1024 11:39:26.890705    5233 load.go:37] Reloading schema and connectors...
+I1024 11:39:26.900297    5233 control.go:45] [engine.Service /emulator/pos-v1 a814] UpdateSchema(): done sources: schema/schema.gql [1384B] 
+I1024 11:39:26.906981    5233 control.go:73] [engine.Service /emulator/pos-v1 a814] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] 
+I1024 11:39:26.924894    5233 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "/Users/asarwar/Documents/GitHub/pos-v1/dataconnect-generated/js/default-connector"
+I1024 11:39:26.927403    5233 collector.go:107] schema extensions wrote into "/Users/asarwar/Documents/GitHub/pos-v1/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [60423B] 
+I1024 11:39:26.930529    5233 collector.go:107] connector "default" javascriptSdk wrote into "/Users/asarwar/Documents/GitHub/pos-v1/dataconnect-generated/js/default-connector"
+Generated sources: index.d.ts [264B] esm/index.esm.js [179B] esm/package.json [17B] index.cjs.js [220B] package.json [623B] 
+I1024 11:39:26.934538    5233 installsdk.go:48] Package @firebasegen/default-connector is already installed. Skipping installation
+I1024 11:39:26.934573    5233 load.go:115] Finished reloading
+I1024 11:39:26.935773    5233 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+I1024 11:39:26.935882    5233 dev.go:95] Listening on address (HTTP + gRPC): [::1]:9399
+I1024 11:39:27.970646    5233 control.go:45] [engine.Service /emulator/pos-v1 8737] UpdateSchema(): done sources: schema/schema.gql [1384B] 
+I1024 11:39:27.970723    5233 control.go:73] [engine.Service /emulator/pos-v1 8737] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] 

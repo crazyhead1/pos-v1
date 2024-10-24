@@ -1,0 +1,94 @@
+[debug] [2024-10-24T05:43:02.775Z] [Firebase Plugin] Activating Firebase extension.
+[info] i  dataconnect: downloading dataconnect-emulator-1.5.1... {"metadata":{"emulator":{"name":"dataconnect"},"message":"downloading dataconnect-emulator-1.5.1..."}}
+[debug] [2024-10-24T05:43:03.007Z] >>> [apiv2][query] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.5.1 
+[debug] [2024-10-24T05:43:03.665Z] <<< [apiv2][status] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.5.1 200
+[debug] [2024-10-24T05:43:03.666Z] <<< [apiv2][body] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.5.1 [stream]
+[debug] [2024-10-24T05:43:07.029Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2024-10-24T05:43:07.030Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2024-10-24T05:43:07.032Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-24T05:43:07.032Z] > authorizing via signed-in user (donotmesswithcrazyhead@gmail.com)
+[debug] [2024-10-24T05:43:07.033Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.033Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.034Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:07.034Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:07.035Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.038Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2024-10-24T05:43:07.038Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2024-10-24T05:43:07.039Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-24T05:43:07.040Z] > authorizing via signed-in user (donotmesswithcrazyhead@gmail.com)
+[debug] [2024-10-24T05:43:07.040Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.040Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.040Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:07.040Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:07.041Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.500Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:07.500Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.500Z] [Firebase Plugin] User found:  donotmesswithcrazyhead@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2024-10-24T05:43:07.502Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.502Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.502Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:07.502Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:07.502Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.506Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:07.506Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.506Z] [Firebase Plugin] User found:  donotmesswithcrazyhead@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2024-10-24T05:43:07.507Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.508Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.508Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:07.508Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:07.508Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.686Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:07.686Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.687Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2024-10-24T05:43:07.704Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:07.704Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.705Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2024-10-24T05:43:08.079Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2024-10-24T05:43:08.079Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2024-10-24T05:43:08.080Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2024-10-24T05:43:08.080Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:08.080Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:08.080Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:08.080Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:08.080Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:08.218Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2024-10-24T05:43:08.219Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2024-10-24T05:43:08.219Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2024-10-24T05:43:08.219Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:08.219Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:08.219Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:08.220Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:08.220Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:08.255Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:08.255Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:08.256Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2024-10-24T05:43:08.384Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:08.384Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:08.385Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2024-10-24T05:43:12.199Z] 'fdc build' failed with error: Unable to build your Data Connect schema and connectors (exit code 1): E1024 10:43:12.197849   98798 cmd.go:41] Error loading data connect config: could not find dataconnect.yaml in `/Users/asarwar/Documents/GitHub/pos-v1/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"'fdc build' failed with error: Unable to build your Data Connect schema and connectors (exit code 1): E1024 10:43:12.197849   98798 cmd.go:41] Error loading data connect config: could not find dataconnect.yaml in `/Users/asarwar/Documents/GitHub/pos-v1/dataconnect`\n"}}
+[debug] [2024-10-24T05:45:47.152Z] >>> [apiv2][query] GET https://accounts.google.com/o/oauth2/revoke token=1%2F%2F03iyPkrzA32ifCgYIARAAGAMSNwF-L9IrQQ-OEuA-8Ev3gCle3-sg6xIUlwl3sL08v9vd1g7wDMtjtzRzJG82yaZMe2crF4yDog8
+[debug] [2024-10-24T05:45:47.669Z] <<< [apiv2][status] GET https://accounts.google.com/o/oauth2/revoke 400
+[debug] [2024-10-24T05:45:47.670Z] <<< [apiv2][body] GET https://accounts.google.com/o/oauth2/revoke {"error":"invalid_token"}
+[warn] ⚠  Invalid refresh token for donotmesswithcrazyhead@gmail.com, did not need to deauthorize 
+[info] ✔  Logged out from donotmesswithcrazyhead@gmail.com 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=24809306&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2024-10-24T05:46:25.281Z] >>> [apiv2][query] POST https://accounts.google.com/o/oauth2/token [none]
+[debug] [2024-10-24T05:46:25.281Z] >>> [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[debug] [2024-10-24T05:46:25.766Z] <<< [apiv2][status] POST https://accounts.google.com/o/oauth2/token 200
+[debug] [2024-10-24T05:46:25.767Z] <<< [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2024-10-24T05:46:25.830Z] Checked if tokens are valid: true, expires at: 1729752384767
+[debug] [2024-10-24T05:46:25.830Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2024-10-24T05:46:26.196Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2024-10-24T05:46:26.196Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2024-10-24T05:46:26.196Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2024-10-24T05:46:26.196Z] Checked if tokens are valid: true, expires at: 1729752384767
+[debug] [2024-10-24T05:46:26.196Z] Checked if tokens are valid: true, expires at: 1729752384767
+[debug] [2024-10-24T05:46:26.197Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
