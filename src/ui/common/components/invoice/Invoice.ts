@@ -78,8 +78,8 @@ export const useStylesFromThemeFunction = createUseStyles(
         flexDirection: "column",
         alignItems: "space-around",
         flexWrap: "wrap",
-        paddingTop: "10%",
-        paddingLeft: "8%",
+        paddingTop: "5%",
+        paddingLeft: "5%",
         justifyContent: "space-around",
         width: "100%",
         minWidth: "fit-content",
@@ -98,6 +98,19 @@ export const useStylesFromThemeFunction = createUseStyles(
         display: "flex",
         justifyContent: "space-between",
         width: "100%",
+      },
+      pl5: {
+        paddingLeft: "5%",
+      },
+      p5: {
+        padding: "5%",
+      },
+      spaceBetween: {
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "space-between",
       },
       paddingtop8: {
         paddingTop: "8%",

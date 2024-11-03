@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
 import ButtonComponent from "../common/components/button-component";
 import DropdownSearch from "../common/components/dropdown-serach";
 import InputComponent from "../common/components/input-component";
@@ -37,13 +38,18 @@ export const POSEngine: React.FC<ComponentProps> = ({
   products,
   disabled,
 }) => {
+  const invoiceRef = useRef<HTMLDivElement | null>(null);
+
+  const handlePrintHook = useReactToPrint({
+    content: () => invoiceRef.current,
+  });
   const { productList, loading } = useSelector(
     (state: IStateSelector) => state.data
   );
   const [showLoader, setShowLoader] = useState(false || isLoading || loading);
 
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = React.useState(1 as number);
+  const [quantity, setQuantity] = React.useState(0);
   const [selectedProduct, setSelectedProduct] = React.useState(null as any);
   const [addedProducts, setAddedProducts] = React.useState([] as any[]);
   const [invoiceNumber, setInvoiceNumber] = React.useState("");
@@ -65,15 +71,18 @@ export const POSEngine: React.FC<ComponentProps> = ({
       //       value: product,
       //     }))
       //   :
-      productList?.map((product) => ({
-        label: `${product.id} - ${product.name}`,
-        value: product,
-      })),
+      productList
+        ?.map((product) => ({
+          label: `${product.id} - ${product.name}`,
+          value: product,
+        }))
+        ?.filter((product) => parseInt(product.value.unitsInStock, 10) > 0),
     [productList]
   );
   useEffect(() => {
     dispatch(fetchProductList());
   }, [dispatch]);
+
   const productChange = (product: any) => {
     setSelectedProduct(product);
     setQuantity(product.unitsInStock && product.unitsInStock > 1 ? 1 : 0);
@@ -174,8 +183,22 @@ export const POSEngine: React.FC<ComponentProps> = ({
   }, [addedProducts]);
 
   const handleProductAdd = () => {
-    if (!selectedProduct) return;
+    if (!quantity || quantity <= 0) {
+      toast.error("Quantity should be greater than 0");
+      return;
+    }
+    if (!selectedProduct) {
+      toast.error("Please select a product");
+      return;
+    }
 
+    if (
+      selectedProduct.unitsInStock <= 0 ||
+      selectedProduct.unitsInStock < quantity
+    ) {
+      toast.error("No more units in stock");
+      return;
+    }
     let addNewProduct = true;
     isLoading = true;
     addedProducts.forEach((product) => {
@@ -211,12 +234,70 @@ export const POSEngine: React.FC<ComponentProps> = ({
 
   const handlePrint = async () => {
     try {
-      // confirm order here
+      // invoice print template
+      const Invoice = React.forwardRef((props, ref) => (
+        <div className="invoice" ref={invoiceRef}>
+          <div className="invoice-header">
+            <h1>Invoice</h1>
+            <h3>Invoice Number: ${invoiceNumber}</h3>
+          </div>
+          <div className="invoice-body">
+            <table className="invoice-table">
+              <tr className="invoice-table-row">
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+              $
+              {addedProducts
+                .map(
+                  (product) => `
+                <tr class="invoice-table-row">
+                  <td>${product.name}</td>
+                  <td>${product.quantity}</td>
+                  <td>${product.unitPrice}</td>
+                  <td>${product.quantity * product.unitPrice}</td>
+                </tr>
+              `
+                )
+                .join("")}
+            </table>
+          </div>
+          <div className="invoice-footer">
+            <h3>
+              Subtotal: $
+              {addedProducts.reduce(
+                (acc, product) => acc + product.quantity * product.unitPrice,
+                0
+              )}
+            </h3>
+            <h3>
+              Tax: $
+              {addedProducts.reduce(
+                (acc, product) => acc + product.quantity * product.unitPrice,
+                0
+              ) * DEFAULT_TAX_RATE}
+            </h3>
+            <h3>
+              Total: $
+              {addedProducts.reduce(
+                (acc, product) => acc + product.quantity * product.unitPrice,
+                0
+              ) +
+                addedProducts.reduce(
+                  (acc, product) => acc + product.quantity * product.unitPrice,
+                  0
+                ) *
+                  DEFAULT_TAX_RATE}
+            </h3>
+          </div>
+        </div>
+      ));
 
-      // print here
-
-      toast.loading("Printing...", { duration: 10000 });
-      //remove this line after confirm order and print
+      // print here using react-to-print
+      handlePrintHook();
+      //remove this line after print
       throw new Error("Error");
     } catch (error) {
       await addLog({
@@ -273,26 +354,26 @@ export const POSEngine: React.FC<ComponentProps> = ({
       .then((res) => {
         // send email here
         const email = localStorage.getItem("email");
-        if (email) {
-          sendEmail(
-            "notasadsarwar@gmail.com",
-            getInvnetoryRunningOutEmailTemplate({
-              invoice: {
-                invoiceNumber,
-                customer: orderPayload.customerName,
-                date: orderPayload.dateTime,
-              },
-              products: productsInOrder,
-              total: orderPayload.total,
-              tax: orderPayload.tax,
-              company: {
-                email,
-                phone: "---",
-                address: "Pakistan",
-              },
-            })
-          );
-        }
+        // if (email) {
+        //   sendEmail(
+        //     "notasadsarwar@gmail.com",
+        //     getInvnetoryRunningOutEmailTemplate({
+        //       invoice: {
+        //         invoiceNumber,
+        //         customer: orderPayload.customerName,
+        //         date: orderPayload.dateTime,
+        //       },
+        //       products: productsInOrder,
+        //       total: orderPayload.total,
+        //       tax: orderPayload.tax,
+        //       company: {
+        //         email,
+        //         phone: "---",
+        //         address: "Pakistan",
+        //       },
+        //     })
+        //   );
+        // }
 
         setQuantity(1);
         setSelectedProduct(null);
@@ -337,6 +418,7 @@ export const POSEngine: React.FC<ComponentProps> = ({
         <div className={classes.productSearchContainer}>
           <DropdownSearch
             label="Product"
+            value={selectedProduct}
             options={productOptions ?? []}
             placeholder="Search Product"
             onChange={productChange}
@@ -345,13 +427,13 @@ export const POSEngine: React.FC<ComponentProps> = ({
             <InputComponent
               label="Quantity"
               name="quantity"
-              type="number"
               variant="primary"
-              value={`${quantity}`}
-              placeholder="0"
+              value={quantity.toString()}
+              placeholder="Enter quantity"
               onChange={(value) => {
-                if (value < 1) {
-                  toast.error("Quantity cannot be less than 1");
+                const containsNonDigitCharacters = `${value}`.match(/\D/);
+                if (containsNonDigitCharacters) {
+                  toast.error("Quantity should only contain digits");
                   return;
                 }
                 setQuantity(value);

@@ -1,35 +1,35 @@
-import React from 'react';
-import PhoneInput from 'react-phone-number-input';
-import PasswordEye from '../../../../assets/component/PasswordEye';
-import PasswordEyeSlashed from '../../../../assets/component/PasswordEyeSlashed';
-import helpIcon from '../../../../assets/help_icon.svg';
-import {ComponentProps, useStylesFromThemeFunction} from './InputComponent';
-import {Colors} from '../../colors';
-import TooltipComponent from '../tooltip-component';
+import React from "react";
+import PhoneInput from "react-phone-number-input";
+import PasswordEye from "../../../../assets/component/PasswordEye";
+import PasswordEyeSlashed from "../../../../assets/component/PasswordEyeSlashed";
+import helpIcon from "../../../../assets/help_icon.svg";
+import { ComponentProps, useStylesFromThemeFunction } from "./InputComponent";
+import { Colors } from "../../colors";
+import TooltipComponent from "../tooltip-component";
 
 const InputComponent: React.FC<ComponentProps> = ({
   label,
   name,
   placeholder,
-  type = 'text',
+  type = "text",
   containerClassName,
   isDisabled = false,
   isReadOnly,
   optional = false,
-  value = '',
+  value = "",
   showTooltip,
   requirements = [],
   isError,
   isTouched,
-  variant = 'primary',
+  variant = "primary",
   onChange,
-  defaultCountry = 'US',
+  defaultCountry = "US",
   mask,
 }) => {
   const classes = useStylesFromThemeFunction();
   const [toggle, setToggle] = React.useState(false);
   const [isFocus, setIsFocus] = React.useState(false);
-  const [change, setChange] = React.useState<string>('');
+  const [change, setChange] = React.useState<string>("");
   const isPasswordValidated = (error: boolean, touched: boolean) => {
     return error && touched ? classes.passwordError : classes.passwordValid;
   };
@@ -53,40 +53,51 @@ const InputComponent: React.FC<ComponentProps> = ({
         </label>
       )}
 
-      <div
-        className={`${classes.inputContainer}`}
-      >
+      <div className={`${classes.inputContainer}`}>
         {(() => {
           switch (type) {
-            case 'password':
+            case "password":
               return (
                 <div
                   className={`${classes.passwordContainer} ${
-                    isTouched ? isPasswordValidated(isError !== undefined, isTouched) : ''
+                    isTouched
+                      ? isPasswordValidated(isError !== undefined, isTouched)
+                      : ""
                   }`}
                 >
                   <div className={`${classes.passwordSubContainer} `}>
                     <input
                       value={value}
                       className={classes.passwordInput}
-                      type={toggle ? 'text' : 'password'}
+                      type={toggle ? "text" : "password"}
                       placeholder={placeholder}
                       disabled={isDisabled}
                       autoComplete="on"
                       readOnly={isReadOnly}
                     />
-                    <button className={classes.passwordIcon} type="button" onClick={() => setToggle(!toggle)}>
-                      {toggle ? <PasswordEye fill={Colors.purple} /> : <PasswordEyeSlashed fill={Colors.purple} />}
+                    <button
+                      className={classes.passwordIcon}
+                      type="button"
+                      onClick={() => setToggle(!toggle)}
+                    >
+                      {toggle ? (
+                        <PasswordEye fill={Colors.purple} />
+                      ) : (
+                        <PasswordEyeSlashed fill={Colors.purple} />
+                      )}
                     </button>
                   </div>
                   {showTooltip && (
                     <div>
-                      <TooltipComponent requirements={requirements} icon={helpIcon} />
+                      <TooltipComponent
+                        requirements={requirements}
+                        icon={helpIcon}
+                      />
                     </div>
                   )}
                 </div>
               );
-            case 'phone':
+            case "phone":
               return (
                 <PhoneInput
                   international
@@ -103,7 +114,7 @@ const InputComponent: React.FC<ComponentProps> = ({
                 <input
                   value={value}
                   className={`${classes.inputDefault}`}
-                  type={toggle ? type : 'text'}
+                  type={type || "text"}
                   placeholder={placeholder}
                   disabled={isDisabled}
                   autoComplete="on"
@@ -115,9 +126,17 @@ const InputComponent: React.FC<ComponentProps> = ({
               );
           }
         })()}
-        {type === 'password' && (
-          <button className={classes.passwordIcon} type="button" onClick={() => setToggle(!toggle)}>
-            {toggle ? <PasswordEye fill={Colors.purple} /> : <PasswordEyeSlashed fill={Colors.purple} />}
+        {type === "password" && (
+          <button
+            className={classes.passwordIcon}
+            type="button"
+            onClick={() => setToggle(!toggle)}
+          >
+            {toggle ? (
+              <PasswordEye fill={Colors.purple} />
+            ) : (
+              <PasswordEyeSlashed fill={Colors.purple} />
+            )}
           </button>
         )}
       </div>

@@ -5,9 +5,11 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@emotion/styled": "^11.11.0",
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.7",
     "@reduxjs/toolkit": "^1.9.5",
+    "@supabase/supabase-js": "^2.45.6",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "bootstrap": "^5.1.3",

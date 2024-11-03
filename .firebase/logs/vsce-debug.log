@@ -1,0 +1,131 @@
+[debug] [2024-10-24T05:43:02.775Z] [Firebase Plugin] Activating Firebase extension.
+[info] i  dataconnect: downloading dataconnect-emulator-1.5.1... {"metadata":{"emulator":{"name":"dataconnect"},"message":"downloading dataconnect-emulator-1.5.1..."}}
+[debug] [2024-10-24T05:43:03.007Z] >>> [apiv2][query] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.5.1 
+[debug] [2024-10-24T05:43:03.665Z] <<< [apiv2][status] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.5.1 200
+[debug] [2024-10-24T05:43:03.666Z] <<< [apiv2][body] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.5.1 [stream]
+[debug] [2024-10-24T05:43:07.029Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2024-10-24T05:43:07.030Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2024-10-24T05:43:07.032Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-24T05:43:07.032Z] > authorizing via signed-in user (donotmesswithcrazyhead@gmail.com)
+[debug] [2024-10-24T05:43:07.033Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.033Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.034Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:07.034Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:07.035Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.038Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2024-10-24T05:43:07.038Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2024-10-24T05:43:07.039Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-24T05:43:07.040Z] > authorizing via signed-in user (donotmesswithcrazyhead@gmail.com)
+[debug] [2024-10-24T05:43:07.040Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.040Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.040Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:07.040Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:07.041Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.500Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:07.500Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.500Z] [Firebase Plugin] User found:  donotmesswithcrazyhead@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2024-10-24T05:43:07.502Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.502Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.502Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:07.502Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:07.502Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.506Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:07.506Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.506Z] [Firebase Plugin] User found:  donotmesswithcrazyhead@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2024-10-24T05:43:07.507Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.508Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:07.508Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:07.508Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:07.508Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.686Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:07.686Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.687Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2024-10-24T05:43:07.704Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:07.704Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:07.705Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2024-10-24T05:43:08.079Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2024-10-24T05:43:08.079Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2024-10-24T05:43:08.080Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2024-10-24T05:43:08.080Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:08.080Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:08.080Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:08.080Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:08.080Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:08.218Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2024-10-24T05:43:08.219Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2024-10-24T05:43:08.219Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2024-10-24T05:43:08.219Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:08.219Z] Checked if tokens are valid: false, expires at: 1696852767280
+[debug] [2024-10-24T05:43:08.219Z] > refreshing access token with scopes: []
+[debug] [2024-10-24T05:43:08.220Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-24T05:43:08.220Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:08.255Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:08.255Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:08.256Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2024-10-24T05:43:08.384Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2024-10-24T05:43:08.384Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-24T05:43:08.385Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2024-10-24T05:43:12.199Z] 'fdc build' failed with error: Unable to build your Data Connect schema and connectors (exit code 1): E1024 10:43:12.197849   98798 cmd.go:41] Error loading data connect config: could not find dataconnect.yaml in `/Users/asarwar/Documents/GitHub/pos-v1/dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"'fdc build' failed with error: Unable to build your Data Connect schema and connectors (exit code 1): E1024 10:43:12.197849   98798 cmd.go:41] Error loading data connect config: could not find dataconnect.yaml in `/Users/asarwar/Documents/GitHub/pos-v1/dataconnect`\n"}}
+[debug] [2024-10-24T05:45:47.152Z] >>> [apiv2][query] GET https://accounts.google.com/o/oauth2/revoke token=1%2F%2F03iyPkrzA32ifCgYIARAAGAMSNwF-L9IrQQ-OEuA-8Ev3gCle3-sg6xIUlwl3sL08v9vd1g7wDMtjtzRzJG82yaZMe2crF4yDog8
+[debug] [2024-10-24T05:45:47.669Z] <<< [apiv2][status] GET https://accounts.google.com/o/oauth2/revoke 400
+[debug] [2024-10-24T05:45:47.670Z] <<< [apiv2][body] GET https://accounts.google.com/o/oauth2/revoke {"error":"invalid_token"}
+[warn] ⚠  Invalid refresh token for donotmesswithcrazyhead@gmail.com, did not need to deauthorize 
+[info] ✔  Logged out from donotmesswithcrazyhead@gmail.com 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=24809306&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2024-10-24T05:46:25.281Z] >>> [apiv2][query] POST https://accounts.google.com/o/oauth2/token [none]
+[debug] [2024-10-24T05:46:25.281Z] >>> [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[debug] [2024-10-24T05:46:25.766Z] <<< [apiv2][status] POST https://accounts.google.com/o/oauth2/token 200
+[debug] [2024-10-24T05:46:25.767Z] <<< [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2024-10-24T05:46:25.830Z] Checked if tokens are valid: true, expires at: 1729752384767
+[debug] [2024-10-24T05:46:25.830Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2024-10-24T05:46:26.196Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2024-10-24T05:46:26.196Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2024-10-24T05:46:26.196Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2024-10-24T05:46:26.196Z] Checked if tokens are valid: true, expires at: 1729752384767
+[debug] [2024-10-24T05:46:26.196Z] Checked if tokens are valid: true, expires at: 1729752384767
+[debug] [2024-10-24T05:46:26.197Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2024-11-02T06:48:37.599Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2024-11-02T06:48:49.482Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] i  dataconnect: downloading dataconnect-emulator-1.6.0... {"metadata":{"emulator":{"name":"dataconnect"},"message":"downloading dataconnect-emulator-1.6.0..."}}
+[debug] [2024-11-02T06:48:52.971Z] >>> [apiv2][query] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.6.0 
+[debug] [2024-11-02T06:48:53.927Z] <<< [apiv2][status] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.6.0 200
+[debug] [2024-11-02T06:48:53.927Z] <<< [apiv2][body] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-macos-v1.6.0 [stream]
+[info] i  dataconnect: Removing outdated emulator files: dataconnect-emulator-1.5.1 {"metadata":{"emulator":{"name":"dataconnect"},"message":"Removing outdated emulator files: dataconnect-emulator-1.5.1"}}
+[debug] [2024-11-02T06:49:07.769Z] I1102 11:49:07.762190   14869 control.go:45] [engine.Service /emulator/pos-v1 08ae] UpdateSchema(): done sources: schema/schema.gql [1384B] 
+I1102 11:49:07.768103   14869 control.go:73] [engine.Service /emulator/pos-v1 08ae] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.762190   14869 control.go:45] [engine.Service /emulator/pos-v1 08ae] UpdateSchema(): done sources: schema/schema.gql [1384B] \nI1102 11:49:07.768103   14869 control.go:73] [engine.Service /emulator/pos-v1 08ae] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] \n"}}
+[debug] [2024-11-02T06:49:07.773Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-11-02T06:49:07.774Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-11-02T06:49:07.774Z] Starting Data Connect Emulator with command {"binary":"/Users/asarwar/.cache/firebase/emulators/dataconnect-emulator-1.6.0","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/Users/asarwar/Documents/GitHub/pos-v1/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/Users/asarwar/.cache/firebase/emulators/dataconnect-emulator-1.6.0\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/Users/asarwar/Documents/GitHub/pos-v1/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2024-11-02T06:49:07.799Z] I1102 11:49:07.799289   14871 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.799289   14871 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2024-11-02T06:49:07.807Z] I1102 11:49:07.806999   14871 control.go:45] [engine.Service /emulator/pos-v1 97b1] UpdateSchema(): done sources: schema/schema.gql [1384B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.806999   14871 control.go:45] [engine.Service /emulator/pos-v1 97b1] UpdateSchema(): done sources: schema/schema.gql [1384B] \n"}}
+[debug] [2024-11-02T06:49:07.813Z] I1102 11:49:07.813442   14871 control.go:73] [engine.Service /emulator/pos-v1 97b1] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.813442   14871 control.go:73] [engine.Service /emulator/pos-v1 97b1] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] \n"}}
+[debug] [2024-11-02T06:49:07.827Z] I1102 11:49:07.827048   14871 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "/Users/asarwar/Documents/GitHub/pos-v1/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.827048   14871 codegen.go:82] [connector \"default\" javascriptSdk] Generating sources into \"/Users/asarwar/Documents/GitHub/pos-v1/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2024-11-02T06:49:07.833Z] I1102 11:49:07.833441   14871 collector.go:107] schema extensions wrote into "/Users/asarwar/Documents/GitHub/pos-v1/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [61293B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.833441   14871 collector.go:107] schema extensions wrote into \"/Users/asarwar/Documents/GitHub/pos-v1/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [61293B] \n"}}
+[debug] [2024-11-02T06:49:07.859Z] I1102 11:49:07.859395   14871 collector.go:107] connector "default" javascriptSdk wrote into "/Users/asarwar/Documents/GitHub/pos-v1/dataconnect-generated/js/default-connector"
+Generated sources: index.d.ts [264B] esm/index.esm.js [179B] esm/package.json [17B] index.cjs.js [220B] package.json [623B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.859395   14871 collector.go:107] connector \"default\" javascriptSdk wrote into \"/Users/asarwar/Documents/GitHub/pos-v1/dataconnect-generated/js/default-connector\"\nGenerated sources: index.d.ts [264B] esm/index.esm.js [179B] esm/package.json [17B] index.cjs.js [220B] package.json [623B] \n"}}
+[debug] [2024-11-02T06:49:07.865Z] I1102 11:49:07.865619   14871 installsdk.go:48] Package @firebasegen/default-connector is already installed. Skipping installation
+I1102 11:49:07.865650   14871 load.go:115] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.865619   14871 installsdk.go:48] Package @firebasegen/default-connector is already installed. Skipping installation\nI1102 11:49:07.865650   14871 load.go:115] Finished reloading\n"}}
+[debug] [2024-11-02T06:49:07.867Z] I1102 11:49:07.866947   14871 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:07.866947   14871 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2024-11-02T06:49:08.006Z] I1102 11:49:08.006821   14871 engine.go:148] [engine.Service /emulator/pos-v1 97b1] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:08.006821   14871 engine.go:148] [engine.Service /emulator/pos-v1 97b1] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2024-11-02T06:49:08.163Z] I1102 11:49:08.163569   14871 engine.go:148] [engine.Service /emulator/pos-v1 97b1] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1102 11:49:08.163569   14871 engine.go:148] [engine.Service /emulator/pos-v1 97b1] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
