@@ -9,6 +9,10 @@
       "moduleResolution": "node",
       "allowSyntheticDefaultImports" : true,
       "esModuleInterop" : true,
+      "baseUrl": "src",
+      "paths": {
+        "assets/*": ["assets/*"]
+      }
     },
     "include": [ "src/assets", "src/custom.d.ts"],
   }

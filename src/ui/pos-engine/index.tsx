@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
 import ButtonComponent from "../common/components/button-component";
 import DropdownSearch from "../common/components/dropdown-serach";
 import InputComponent from "../common/components/input-component";
@@ -37,6 +38,11 @@ export const POSEngine: React.FC<ComponentProps> = ({
   products,
   disabled,
 }) => {
+  const invoiceRef = useRef<HTMLDivElement | null>(null);
+
+  const handlePrintHook = useReactToPrint({
+    content: () => invoiceRef.current,
+  });
   const { productList, loading } = useSelector(
     (state: IStateSelector) => state.data
   );
@@ -228,12 +234,70 @@ export const POSEngine: React.FC<ComponentProps> = ({
 
   const handlePrint = async () => {
     try {
-      // confirm order here
+      // invoice print template
+      const Invoice = React.forwardRef((props, ref) => (
+        <div className="invoice" ref={invoiceRef}>
+          <div className="invoice-header">
+            <h1>Invoice</h1>
+            <h3>Invoice Number: ${invoiceNumber}</h3>
+          </div>
+          <div className="invoice-body">
+            <table className="invoice-table">
+              <tr className="invoice-table-row">
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+              $
+              {addedProducts
+                .map(
+                  (product) => `
+                <tr class="invoice-table-row">
+                  <td>${product.name}</td>
+                  <td>${product.quantity}</td>
+                  <td>${product.unitPrice}</td>
+                  <td>${product.quantity * product.unitPrice}</td>
+                </tr>
+              `
+                )
+                .join("")}
+            </table>
+          </div>
+          <div className="invoice-footer">
+            <h3>
+              Subtotal: $
+              {addedProducts.reduce(
+                (acc, product) => acc + product.quantity * product.unitPrice,
+                0
+              )}
+            </h3>
+            <h3>
+              Tax: $
+              {addedProducts.reduce(
+                (acc, product) => acc + product.quantity * product.unitPrice,
+                0
+              ) * DEFAULT_TAX_RATE}
+            </h3>
+            <h3>
+              Total: $
+              {addedProducts.reduce(
+                (acc, product) => acc + product.quantity * product.unitPrice,
+                0
+              ) +
+                addedProducts.reduce(
+                  (acc, product) => acc + product.quantity * product.unitPrice,
+                  0
+                ) *
+                  DEFAULT_TAX_RATE}
+            </h3>
+          </div>
+        </div>
+      ));
 
-      // print here
-
-      toast.loading("Printing...", { duration: 10000 });
-      //remove this line after confirm order and print
+      // print here using react-to-print
+      handlePrintHook();
+      //remove this line after print
       throw new Error("Error");
     } catch (error) {
       await addLog({

@@ -154,7 +154,7 @@ export const Invoice: React.FC<ComponentProps> = ({
           }}
           isLoading={isLoading}
           //   size={btnSize.M}
-          disabled={amountPaid <= 0 || isLoading}
+          disabled={amountPaid <= 0 || amountPaid < amountDue || isLoading}
           variant={btnType.PRIMARY}
         >
           Confirm
